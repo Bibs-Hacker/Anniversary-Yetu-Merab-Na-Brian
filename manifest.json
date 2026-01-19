@@ -1,0 +1,17 @@
+{
+  "name": "Our Eternal Bond - Tech Brian & Merab",
+  "short_name": "EternalBond",
+  "description": "Our romantic relationship app – a mega chronicle of love!",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#1a1a2e",
+  "theme_color": "#ff69b4",
+  "icons": [
+    {
+      "src": "https://files.catbox.moe/08b4pp.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}

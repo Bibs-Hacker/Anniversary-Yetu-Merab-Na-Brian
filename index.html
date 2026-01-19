@@ -9,8 +9,11 @@
     <!-- Firebase SDK (modular v9+) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js";
 
+        // Initialize Firebase with expanded config handling
         window.firebaseApp = initializeApp({
             // ── REPLACE THESE WITH YOUR REAL FIREBASE CONFIG ────────────────────────────────
             apiKey: "AIzaSyCwcdPhGcHb6kDhVPYJgV0lpZoWX3qSn4A",           // ← CHANGE!
@@ -24,8 +27,11 @@
         });
 
         window.auth = getAuth(window.firebaseApp);
+        window.db = getFirestore(window.firebaseApp);
+        window.storage = getStorage(window.firebaseApp);
     </script>
     <style>
+        /* Enhanced Gradient & Smooth Layout: Multi-layer gradients, softer transitions, fun neon pulses */
         :root {
             --neon-pink: #ff69b4;
             --neon-purple: #da70d6;
@@ -35,12 +41,14 @@
             --bg-dark: #1a1a2e;
             --text-light: #f0e7f5;
             --heart-red: #ff1493;
-            --shadow-glow: 0 0 20px rgba(255, 105, 180, 0.5), 0 0 40px rgba(0, 191, 255, 0.3);
+            --shadow-glow: 0 0 20px rgba(255, 105, 180, 0.5), 0 0 40px rgba(0, 191, 255, 0.3), 0 0 60px rgba(218, 112, 214, 0.2);
+            --gradient-bg: linear-gradient(135deg, var(--bg-dark) 0%, #0f0f23 50%, #1a1a2e 100%);
+            --gradient-fun: linear-gradient(45deg, var(--neon-pink) 0%, var(--neon-purple) 33%, var(--neon-blue) 66%, var(--neon-gold) 100%);
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--bg-dark), #0f0f23);
+            background: var(--gradient-bg);
             color: var(--text-light);
             display: flex;
             justify-content: center;
@@ -49,64 +57,105 @@
             margin: 0;
             overflow: hidden;
             position: relative;
+            transition: background 1.5s ease-in-out; /* Smooth background transitions */
         }
 
-        .particles, .hearts { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
-        .particle { position: absolute; background: var(--neon-gold); border-radius: 50%; opacity: 0.6; animation: sparkle 2.5s infinite ease-in-out; }
-        @keyframes sparkle { 0% { transform: scale(0) translateY(0); opacity: 0; } 50% { transform: scale(1.2) translateY(-20px); opacity: 1; } 100% { transform: scale(0) translateY(-40px); opacity: 0; } }
+        body.fun-mode {
+            background: var(--gradient-fun);
+            animation: gradientShift 10s infinite alternate;
+        }
 
-        .heart { position: absolute; font-size: 2.5rem; color: var(--heart-red); cursor: pointer; animation: floatHeart 5s infinite ease-in-out, rotateHeart 3s infinite; opacity: 0.5; pointer-events: auto; }
-        .heart.explode { animation: explodeHeart 0.8s forwards; }
-        @keyframes explodeHeart { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(3) rotate(45deg); opacity: 0; } }
-        @keyframes floatHeart { 0% { transform: translateY(0) scale(1); } 50% { transform: translateY(-60vh) scale(1.3); } 100% { transform: translateY(-120vh) scale(1); } }
-        @keyframes rotateHeart { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
 
+        /* Particles & Hearts: More layers for depth, smoother animations */
+        .particles, .hearts { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; transition: opacity 1s ease; }
+        .particle { position: absolute; background: var(--neon-gold); border-radius: 50%; opacity: 0.6; animation: sparkle 3s infinite ease-in-out; box-shadow: 0 0 10px var(--neon-glow); }
+        @keyframes sparkle { 0% { transform: scale(0) translateY(0) rotate(0deg); opacity: 0; } 50% { transform: scale(1.5) translateY(-30px) rotate(180deg); opacity: 1; } 100% { transform: scale(0) translateY(-60px) rotate(360deg); opacity: 0; } }
+
+        .heart { position: absolute; font-size: 2.5rem; color: var(--heart-red); cursor: pointer; animation: floatHeart 6s infinite ease-in-out, rotateHeart 4s infinite, pulseHeart 1.5s infinite; opacity: 0.6; pointer-events: auto; text-shadow: 0 0 15px var(--heart-red); }
+        .heart.explode { animation: explodeHeart 1s forwards; }
+        @keyframes pulseHeart { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+        @keyframes explodeHeart { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(4) rotate(90deg); opacity: 0; } }
+        @keyframes floatHeart { 0% { transform: translateY(0) scale(1); } 50% { transform: translateY(-70vh) scale(1.4); filter: brightness(1.2); } 100% { transform: translateY(-140vh) scale(1); } }
+        @keyframes rotateHeart { 0% { transform: rotate(0deg); } 100% { transform: rotate(720deg); } }
+
+        /* Container: Smoother borders, gradient overlay for fun */
         .container {
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 25px;
-            padding: 50px;
-            max-width: 520px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 60px;
+            max-width: 550px;
             width: 100%;
-            box-shadow: var(--shadow-glow), 0 0 60px rgba(218, 112, 214, 0.4);
+            box-shadow: var(--shadow-glow), inset 0 0 50px rgba(255, 105, 180, 0.3);
             text-align: center;
             position: relative;
             z-index: 2;
-            backdrop-filter: blur(20px);
-            animation: epicPulse 1.8s infinite alternate;
+            backdrop-filter: blur(25px);
+            animation: epicPulse 2s infinite alternate ease-in-out;
+            transition: all 0.8s ease;
         }
 
-        @keyframes epicPulse { from { box-shadow: var(--shadow-glow); } to { box-shadow: 0 0 30px rgba(255, 105, 180, 0.8), 0 0 50px rgba(218, 112, 214, 0.5), 0 0 70px rgba(0, 191, 255, 0.4); } }
+        .container:hover { transform: scale(1.02); box-shadow: 0 0 40px var(--neon-pink), 0 0 60px var(--neon-purple); }
 
-        h1 { font-size: 2.8rem; margin-bottom: 25px; text-shadow: 0 0 20px var(--neon-pink), 0 0 30px var(--neon-purple), 0 0 40px var(--neon-blue); animation: glowTitle 1.2s infinite alternate; }
-        @keyframes glowTitle { from { text-shadow: 0 0 15px var(--neon-pink); } to { text-shadow: 0 0 25px var(--neon-gold), 0 0 35px var(--neon-blue); } }
+        @keyframes epicPulse { from { box-shadow: var(--shadow-glow); } to { box-shadow: 0 0 35px rgba(255, 105, 180, 0.9), 0 0 55px rgba(218, 112, 214, 0.6), 0 0 75px rgba(0, 191, 255, 0.5); } }
 
-        form { display: flex; flex-direction: column; gap: 18px; }
-        .input-group { position: relative; }
-        input { padding: 14px 45px 14px 14px; border: 2px solid var(--neon-pink); border-radius: 10px; background: rgba(255, 255, 255, 0.12); color: var(--text-light); font-size: 1.1rem; width: 100%; box-sizing: border-box; transition: all 0.4s; }
-        input:focus { outline: none; box-shadow: 0 0 20px var(--neon-purple); transform: scale(1.03); }
-        .eye-icon { position: absolute; right: 18px; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--neon-glow); font-size: 1.4rem; transition: color 0.4s; }
-        .eye-icon:hover { color: var(--neon-gold); }
+        h1 { font-size: 3rem; margin-bottom: 30px; text-shadow: 0 0 25px var(--neon-pink), 0 0 35px var(--neon-purple), 0 0 45px var(--neon-blue); animation: glowTitle 1.5s infinite alternate ease; letter-spacing: 1px; }
+        @keyframes glowTitle { from { text-shadow: 0 0 20px var(--neon-pink); filter: brightness(1); } to { text-shadow: 0 0 30px var(--neon-gold), 0 0 40px var(--neon-blue); filter: brightness(1.1); } }
 
-        button { padding: 14px; background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple), var(--neon-blue), var(--neon-gold)); border: none; border-radius: 10px; color: var(--neon-glow); font-size: 1.2rem; cursor: pointer; transition: all 0.4s; }
-        button:hover { transform: scale(1.08); box-shadow: 0 0 25px var(--neon-pink); }
-        button:active { transform: scale(1.02); }
+        form { display: flex; flex-direction: column; gap: 20px; transition: all 0.5s ease; }
+        .input-group { position: relative; transition: transform 0.3s ease; }
+        input { padding: 16px 50px 16px 16px; border: 2px solid var(--neon-pink); border-radius: 12px; background: rgba(255, 255, 255, 0.15); color: var(--text-light); font-size: 1.2rem; width: 100%; box-sizing: border-box; transition: all 0.5s ease; box-shadow: inset 0 0 10px rgba(255, 105, 180, 0.2); }
+        input:focus { outline: none; box-shadow: 0 0 25px var(--neon-purple), inset 0 0 15px var(--neon-blue); transform: scale(1.04); border-color: var(--neon-gold); }
 
-        .nav-buttons { display: flex; flex-wrap: wrap; justify-content: center; margin-top: 25px; gap: 12px; }
-        .nav-buttons button { flex: 1 1 45%; padding: 12px; font-size: 1rem; }
-        .back-button { margin-top: 25px; background: linear-gradient(135deg, var(--neon-blue), var(--neon-gold)); }
+        .eye-icon { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--neon-glow); font-size: 1.5rem; transition: color 0.5s ease, transform 0.3s ease; }
+        .eye-icon:hover { color: var(--neon-gold); transform: translateY(-50%) scale(1.1); }
 
-        .screen { display: none; opacity: 0; transition: opacity 0.8s ease-in-out; }
-        .screen.active { display: block; opacity: 1; }
+        button { padding: 16px; background: var(--gradient-fun); border: none; border-radius: 12px; color: var(--neon-glow); font-size: 1.3rem; cursor: pointer; transition: all 0.5s ease; box-shadow: 0 0 15px var(--neon-pink); background-size: 200% 200%; animation: buttonGradient 5s infinite alternate; }
+        button:hover { transform: scale(1.1); box-shadow: 0 0 30px var(--neon-pink), 0 0 20px var(--neon-gold); }
+        button:active { transform: scale(1.05); }
+        @keyframes buttonGradient { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
 
-        .message { margin-top: 25px; font-size: 1rem; min-height: 1.4em; }
-        .success { color: var(--neon-glow); }
-        .error { color: var(--heart-red); }
+        .nav-buttons { display: flex; flex-wrap: wrap; justify-content: center; margin-top: 30px; gap: 15px; transition: all 0.5s ease; }
+        .nav-buttons button { flex: 1 1 40%; padding: 14px; font-size: 1.1rem; background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple)); transition: all 0.4s ease; }
+        .nav-buttons button:hover { background: var(--gradient-fun); transform: rotate(2deg) scale(1.05); }
 
-        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 25px; }
-        .gallery img { width: 100%; border-radius: 15px; box-shadow: 0 0 15px var(--neon-purple); transition: all 0.4s; }
-        .gallery img:hover { transform: scale(1.1) rotate(5deg); box-shadow: 0 0 30px var(--neon-gold); }
+        .back-button { margin-top: 30px; background: linear-gradient(135deg, var(--neon-blue), var(--neon-gold)); width: 100%; }
 
-        footer { margin-top: 35px; font-size: 0.9rem; opacity: 0.8; }
+        .screen { display: none; opacity: 0; transition: opacity 1s ease-in-out, transform 1s ease; }
+        .screen.active { display: block; opacity: 1; transform: translateY(0); }
+        .screen.entering { transform: translateY(-20px); }
+
+        .message { margin-top: 30px; font-size: 1.1rem; min-height: 1.5em; transition: color 0.5s ease; }
+        .success { color: var(--neon-glow); text-shadow: 0 0 10px var(--neon-blue); }
+        .error { color: var(--heart-red); text-shadow: 0 0 10px var(--heart-red); }
+
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; margin-top: 30px; transition: all 0.5s ease; }
+        .gallery img { width: 100%; border-radius: 20px; box-shadow: 0 0 20px var(--neon-purple); transition: all 0.6s ease; animation: galleryFade 1.2s ease; }
+        .gallery img:hover { transform: scale(1.15) rotate(3deg); box-shadow: 0 0 35px var(--neon-gold), 0 0 25px var(--neon-pink); }
+        @keyframes galleryFade { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+        .story-section { text-align: left; margin-top: 30px; line-height: 1.8; font-size: 1.1rem; transition: opacity 1s ease; }
+        .story-section h2 { color: var(--neon-gold); margin-bottom: 15px; text-shadow: 0 0 10px var(--neon-gold); animation: h2Glow 2s infinite alternate; }
+        @keyframes h2Glow { from { text-shadow: 0 0 5px var(--neon-gold); } to { text-shadow: 0 0 15px var(--neon-gold); } }
+        .story-section p { margin-bottom: 20px; padding: 10px; background: rgba(255, 255, 255, 0.05); border-radius: 10px; box-shadow: inset 0 0 10px rgba(218, 112, 214, 0.2); transition: background 0.5s ease; }
+        .story-section p:hover { background: rgba(255, 255, 255, 0.1); }
+        .story-section ul { list-style-type: none; padding-left: 0; }
+        .story-section li { margin-bottom: 15px; padding: 10px; background: rgba(0, 191, 255, 0.1); border-radius: 8px; box-shadow: 0 0 10px var(--neon-blue); transition: transform 0.3s ease; }
+        .story-section li:hover { transform: translateX(10px); }
+
+        footer { margin-top: 40px; font-size: 1rem; opacity: 0.9; text-shadow: 0 0 5px var(--neon-glow); transition: opacity 0.5s ease; }
+        footer:hover { opacity: 1; }
+
+        /* File Upload Styles for Cloud Storage Integration */
+        .upload-section { margin-top: 30px; padding: 20px; background: rgba(255, 255, 255, 0.1); border-radius: 15px; box-shadow: 0 0 20px var(--neon-purple); transition: all 0.5s ease; }
+        .upload-section input[type="file"] { display: none; }
+        .upload-section label { padding: 14px; background: var(--gradient-fun); border-radius: 10px; color: var(--neon-glow); cursor: pointer; display: block; text-align: center; transition: all 0.4s ease; }
+        .upload-section label:hover { transform: scale(1.05); }
+        .upload-progress { margin-top: 15px; height: 10px; background: rgba(255, 255, 255, 0.2); border-radius: 5px; overflow: hidden; transition: width 0.5s ease; }
+        .upload-progress-bar { height: 100%; background: var(--neon-green); width: 0%; transition: width 0.5s ease; }
     </style>
 </head>
 <body>
@@ -116,217 +165,459 @@
         <!-- Login Screen -->
         <div id="loginScreen" class="screen active">
             <h1>Our Eternal Bond 💖<br>Tech Brian & Merab</h1>
-            <p>Login to our private love channel – where memories live forever. 🌟</p>
+            <p>Enter our fun, gradient-kissed world of love – smoother than ever! 🌟</p>
             <form id="loginForm">
                 <input type="email" id="loginEmail" placeholder="Your Email" required autocomplete="email">
                 <div class="input-group">
                     <input type="password" id="loginPassword" placeholder="Password" required minlength="8">
                     <span class="eye-icon" onclick="togglePassword('loginPassword')">👁️</span>
                 </div>
-                <button type="submit">Enter Our World 💑</button>
+                <button type="submit">Dive Into Our Love 💑</button>
             </form>
-            <p style="margin-top: 18px;">New to our story? <a href="#" onclick="switchScreen('registerScreen')" style="color: var(--neon-pink);">Create our bond</a></p>
+            <p style="margin-top: 20px;">New here? <a href="#" onclick="switchScreen('registerScreen')" style="color: var(--neon-pink); text-shadow: 0 0 5px var(--neon-pink);">Register our eternal vibe</a></p>
             <div id="loginMessage" class="message"></div>
         </div>
 
         <!-- Register Screen -->
         <div id="registerScreen" class="screen">
-            <h1>Begin Our Forever 💕<br>Tech Brian & Merab</h1>
-            <p>Join our eternal journey – register now. 🌹</p>
+            <h1>Start Our Gradient Adventure 💕<br>Tech Brian & Merab</h1>
+            <p>Create an account for smoother, fun-filled bonding! 🌹</p>
             <form id="registrationForm">
+                <input type="text" id="username" placeholder="Username (e.g., TechBrian or Merab)" required>
                 <input type="email" id="email" placeholder="Your Email" required autocomplete="email">
                 <div class="input-group">
                     <input type="password" id="password" placeholder="Create Password (min 8 chars)" required minlength="8">
                     <span class="eye-icon" onclick="togglePassword('password')">👁️</span>
                 </div>
-                <button type="submit">Register Our Love 💖</button>
+                <button type="submit">Register & Unlock Fun 💖</button>
             </form>
-            <p style="margin-top: 18px;">Already bonded? <a href="#" onclick="switchScreen('loginScreen')" style="color: var(--neon-pink);">Login here</a></p>
+            <p style="margin-top: 20px;">Already bonded? <a href="#" onclick="switchScreen('loginScreen')" style="color: var(--neon-pink); text-shadow: 0 0 5px var(--neon-pink);">Login to our gradient world</a></p>
             <div id="registerMessage" class="message"></div>
         </div>
 
-        <!-- Protected Screens (Dashboard / Love Channel) -->
+        <!-- Dashboard / Love Channel – Expanded with User Data & Storage Features -->
         <div id="dashboardScreen" class="screen">
-            <h1>Welcome to Our Private Love Channel 💞</h1>
-            <p>A massive digital legacy project – stories, photos, dreams, and promises. Anniversary: March 12th every year. 🎂</p>
+            <h1>Welcome to Our Love Channel, <span id="userDisplayName"></span>! 💞</h1>
+            <p>A massive, gradient-infused legacy of our love – stories, photos, dreams. Anniversary: March 12th yearly. 🎂 Toggle fun mode for gradients!</p>
+            <button onclick="toggleFunMode()">Toggle Fun Gradient Mode 🎉</button>
             <div class="nav-buttons">
                 <button onclick="switchScreen('pastScreen')">Our Past 🌅</button>
                 <button onclick="switchScreen('presentScreen')">Our Present ✨</button>
                 <button onclick="switchScreen('futureScreen')">Our Future 🚀</button>
                 <button onclick="switchScreen('galleryScreen')">Photo Gallery 📸</button>
                 <button onclick="switchScreen('certificateScreen')">Anniversary Certificate 🎉</button>
+                <button onclick="switchScreen('profileScreen')">My Profile & Data 📝</button>
             </div>
-            <footer>Tech Brian & Merab – Nairobi 2026 | A timeless, multi-million vision love archive</footer>
+            <button onclick="logoutUser()" style="margin-top: 20px; background: linear-gradient(135deg, var(--heart-red), var(--neon-pink));">Logout ❤️</button>
+            <footer>Tech Brian & Merab – Nairobi 2026 | A smoother, modular love masterpiece</footer>
         </div>
 
-        <!-- Past – Deep, detailed, emotional expansion -->
+        <!-- Past Screen – Vastly Expanded for Depth -->
         <div id="pastScreen" class="screen">
-            <h1>Our Past: The Foundation of Forever 💑</h1>
+            <h1>Our Past: Roots of Eternal Love 💑</h1>
             <div class="story-section">
-                <h2>Chapter 1 – The Spark in Nairobi (2018)</h2>
-                <p>It all began in the vibrant chaos of Westlands, Nairobi. Tech Brian, the visionary coder with big dreams, presented at a local tech meetup. Merab, drawn by curiosity and creativity, sat in the audience. Our eyes met during Q&A – that single moment changed everything. Coffee turned into hours of conversation: code, art, ambitions, fears, laughter. Nairobi's energy became the backdrop of our beginning.</p>
-                <h2>Chapter 2 – Building Together (2019–2020)</h2>
-                <p>We coded side-by-side late into Nairobi nights, blending your algorithms with my designs. Adventures followed: climbing Mount Kenya trails hand-in-hand, stargazing in the savanna, dancing at Blankets & Wine. Distance tested us during work travels, but virtual dates kept the flame alive. Every challenge – power outages during calls, rainy traffic jams – only deepened our trust.</p>
-                <h2>Milestones Carved in Memory</h2>
+                <h2>Genesis in Nairobi's Vibrant Heart (2017-2018)</h2>
+                <p>The story of us began amidst Nairobi's bustling streets, where fate wove our paths. Tech Brian, with your innovative mind crafting code that could change worlds, and Merab, channeling creativity into art that touched souls. Our first encounter at a tech-art fusion event in Westlands was electric – conversations flowing like the Nairobi River after rain, blending algorithms with aesthetics.</p>
+                <p>As days turned to months, we explored Kenya's wonders: sunset picnics in Ngong Hills, where winds carried our whispers of dreams; coding retreats in cozy cafes along Kimathi Street, interrupted by laughter and stolen kisses. Challenges like busy schedules tested us, but they forged resilience, turning every obstacle into a stepping stone of trust.</p>
+                <h2>Blooming Bond (2019-2020)</h2>
+                <p>Amid global uncertainties, our love bloomed stronger. Virtual dates during lockdowns, sharing screens to co-create apps and artworks. Trips to Lake Nakuru, flamingos mirroring our passionate hearts. We learned each other's languages – you teaching me binary beauty, I showing you color theory's magic. Every memory, from rainy Nairobi nights to sunny savanna drives, etched our foundation.</p>
+                <h2>Timeless Milestones</h2>
                 <ul>
-                    <li>First date – Artcaffe, Karen: dreams over cappuccino</li>
-                    <li>First kiss – Uhuru Park at dusk</li>
-                    <li>First joint project – A love-inspired app prototype</li>
-                    <li>First big trip – Maasai Mara safari sunsets</li>
-                    <li>First promise – "No matter what, we build together"</li>
+                    <li>First Spark: Tech-art event, Westlands – instant connection ⚡</li>
+                    <li>First Adventure: Ngong Hills picnic – dreams under the sky</li>
+                    <li>First Creation: Joint app prototype – code meets canvas</li>
+                    <li>First Vow: Amid lockdown, promising eternal support</li>
+                    <li>First Escape: Lake Nakuru flamingo watch – nature's romance</li>
+                    <li>First Challenge Overcome: Distance bridged by digital devotion</li>
+                    <li>First Celebration: Private anniversary in Nairobi's hidden gems</li>
+                    <li>First Legacy Step: Planning our shared tech-art empire</li>
                 </ul>
+                <p>This past isn't just history; it's the vibrant gradient base of our love, blending shades of joy, trial, and triumph into a masterpiece.</p>
             </div>
-            <button class="back-button" onclick="switchScreen('dashboardScreen')">Back to Love Channel</button>
+            <button class="back-button" onclick="switchScreen('dashboardScreen')">Return to Love Channel</button>
         </div>
 
-        <!-- Present – Current joy expanded -->
+        <!-- Present Screen – Detailed, Immersive -->
         <div id="presentScreen" class="screen">
-            <h1>Our Present: Living the Dream Daily 🌟</h1>
+            <h1>Our Present: Vibrant Now in Gradient Glory 🌟</h1>
             <div class="story-section">
-                <p>Today we thrive in Nairobi's heartbeat. Morning coffee rituals, evening walks in Karura Forest, collaborative work sessions that blend tech innovation with artistic expression. We celebrate small wins – new app features, completed artworks – with nyama choma dates and rooftop views. March 12th anniversaries are sacred: surprise getaways, custom gifts, renewed vows in quiet moments.</p>
+                <h2>Thriving in Nairobi's Pulse (2021-2025)</h2>
+                <p>Today, our life is a smooth gradient of passion and progress. Mornings in our Nairobi home start with coffee and code reviews, evenings with artistic dinners overlooking the city lights. Your tech breakthroughs inspire my creations, forming a synergy that's unstoppable. We balance work with play – weekend escapes to Amboseli, elephant silhouettes against Kilimanjaro mirroring our towering love.</p>
+                <p>Anniversaries on March 12th are extravagant: hot air balloons over the Rift Valley, custom jewelry encoded with love messages. Challenges like project deadlines are met with mutual support, turning stress into shared victories. Our present is a fun, colorful blend of innovation, romance, and Kenyan adventure.</p>
+                <h2>Daily Delights & Bonds</h2>
                 <ul>
-                    <li>Daily joy: Shared playlists and spontaneous dances</li>
-                    <li>Projects: AI + art fusions changing lives</li>
-                    <li>Adventures: Coastal escapes to Diani, Naivasha sunrises</li>
-                    <li>Support: Your code fixes my design blocks; my creativity fuels your vision</li>
+                    <li>Morning Rituals: Coffee & brainstorming in sunny patios</li>
+                    <li>Collaborations: AI-art hybrids revolutionizing fields</li>
+                    <li>Adventures: Coastal retreats in Watamu, snorkeling in love</li>
+                    <li>Support Systems: Encouraging each other's growth daily</li>
+                    <li>Celebrations: Spontaneous dances in Nairobi rain</li>
+                    <li>Impact: Community tech-art workshops in slums</li>
+                    <li>Intimacy: Quiet nights stargazing from balconies</li>
+                    <li>Future Teases: Planning global expansions together</li>
                 </ul>
+                <p>Our now is smoother than silk, with gradients of emotion painting every moment in vivid hues.</p>
             </div>
-            <button class="back-button" onclick="switchScreen('dashboardScreen')">Back to Love Channel</button>
+            <button class="back-button" onclick="switchScreen('dashboardScreen')">Return to Love Channel</button>
         </div>
 
-        <!-- Future – Visionary & expansive -->
+        <!-- Future Screen – Visionary Expansion -->
         <div id="futureScreen" class="screen">
-            <h1>Our Future: A Legacy of Love & Impact 🚀</h1>
+            <h1>Our Future: Gradient Horizons of Promise 🚀</h1>
             <div class="story-section">
-                <p>Envision global reach from Nairobi roots: tech empire, family, philanthropy. We'll raise children who code and create, travel continents, write our story as inspiration. March 12th will be legendary family tradition. Challenges? Conquered together. Our bond – unbreakable fuel for a world-changing future.</p>
+                <h2>Visions Beyond 2026</h2>
+                <p>Envision a world where our love fuels a global legacy. From Nairobi headquarters, we'll launch tech-art empires, impacting millions. Family life with children inheriting our blend of code and creativity, homes in Kenya and abroad. Travels to exotic locales – coding in Tokyo, art in Venice – strengthening our bond.</p>
+                <p>March 12th will evolve into family traditions, with grand celebrations. Challenges will be opportunities, our gradient love adapting smoothly. Philanthropy through foundations, inspiring young Nairobians. Our future is a promising canvas, layered with fun, success, and eternal devotion.</p>
+                <h2>Promised Milestones</h2>
                 <ul>
-                    <li>Empire: Multi-million impact ventures</li>
-                    <li>Family: Little innovators with big hearts</li>
-                    <li>Legacy: Book, app, foundation in our name</li>
+                    <li>Empire Building: Multi-million ventures worldwide</li>
+                    <li>Family Joy: Raising innovative, loving children</li>
+                    <li>Global Adventures: Retreats blending work and romance</li>
+                    <li>Legacy Creation: Books, apps sharing our story</li>
+                    <li>Philanthropy: Tech-art scholarships for Kenya</li>
+                    <li>Renewals: Decade vows in dream destinations</li>
+                    <li>Innovations: AI-art revolutions changing industries</li>
+                    <li>Eternal Bond: Growing old, still fun and in love</li>
                 </ul>
+                <p>This future shimmers with gradient possibilities, smooth and exciting as our journey continues.</p>
             </div>
-            <button class="back-button" onclick="switchScreen('dashboardScreen')">Back to Love Channel</button>
+            <button class="back-button" onclick="switchScreen('dashboardScreen')">Return to Love Channel</button>
         </div>
 
-        <!-- Gallery & Certificate screens remain the same as before -->
+        <!-- Gallery Screen – With Cloud Storage Upload -->
         <div id="galleryScreen" class="screen">
             <h1>Our Romantic Gallery 📸💕</h1>
-            <p>Cherished moments frozen in time – click hearts for fun explosions!</p>
-            <div class="gallery">
-                <img src="https://files.catbox.moe/spvjqx.jpg" alt="Moment 1">
-                <img src="https://files.catbox.moe/z544u2.jpg" alt="Moment 2">
-                <img src="https://files.catbox.moe/b3v2o4.jpg" alt="Moment 3">
-                <img src="https://files.catbox.moe/tkfvsa.jpg" alt="Moment 4">
+            <p>Upload & relive moments in gradient fun! Click hearts to explode joy.</p>
+            <div class="gallery" id="galleryContainer">
+                <!-- Dynamic images from storage -->
             </div>
-            <button class="back-button" onclick="switchScreen('dashboardScreen')">Back</button>
+            <div class="upload-section">
+                <label for="photoUpload">Upload Love Photo 🌟</label>
+                <input type="file" id="photoUpload" accept="image/*">
+                <div class="upload-progress"><div class="upload-progress-bar" id="uploadProgressBar"></div></div>
+                <div id="uploadMessage" class="message"></div>
+            </div>
+            <button class="back-button" onclick="switchScreen('dashboardScreen')">Return to Love Channel</button>
         </div>
 
+        <!-- Certificate Screen – Download with User Data -->
         <div id="certificateScreen" class="screen">
-            <h1>Anniversary Certificate 🎂</h1>
-            <p>March 12th – forever our day. Download & cherish.</p>
-            <button onclick="downloadCertificate()">Download Certificate 📜</button>
-            <button class="back-button" onclick="switchScreen('dashboardScreen')">Back</button>
+            <h1>Our Gradient Anniversary Certificate 🎂</h1>
+            <p>March 12th – our day! Download personalized cert in fun styles.</p>
+            <button onclick="generateAndDownloadCertificate()">Create & Download 📜</button>
+            <button class="back-button" onclick="switchScreen('dashboardScreen')">Return to Love Channel</button>
+        </div>
+
+        <!-- Profile Screen – User Data Management with Firestore -->
+        <div id="profileScreen" class="screen">
+            <h1>Your Profile, Darling 📝</h1>
+            <p>Edit data for our smoother love story. Stored securely in clouds!</p>
+            <form id="profileForm">
+                <input type="text" id="profileUsername" placeholder="Update Username">
+                <textarea id="profileBio" placeholder="Add Your Bio or Love Note" rows="4"></textarea>
+                <button type="submit">Save Profile 💾</button>
+            </form>
+            <div id="profileMessage" class="message"></div>
+            <div id="profileDisplay" style="margin-top: 30px; padding: 20px; background: rgba(255, 255, 255, 0.1); border-radius: 15px;"></div>
+            <button class="back-button" onclick="switchScreen('dashboardScreen')">Return to Love Channel</button>
         </div>
     </div>
 
     <script type="module">
-        // ── Firebase Auth Helpers ───────────────────────────────────────────────────────
-        const auth = window.auth;
-
-        // Toggle password visibility
+        // ── Modular JS: Core Utilities ──────────────────────────────────────────────────
         function togglePassword(id) {
             const el = document.getElementById(id);
             el.type = el.type === 'password' ? 'text' : 'password';
         }
 
-        // Smooth screen switch with fade
         function switchScreen(id) {
             document.querySelectorAll('.screen').forEach(s => {
-                s.classList.remove('active');
+                s.classList.remove('active', 'entering');
                 s.style.opacity = '0';
+                s.style.transform = 'translateY(20px)';
             });
             const target = document.getElementById(id);
-            target.classList.add('active');
-            setTimeout(() => target.style.opacity = '1', 50);
+            target.classList.add('active', 'entering');
+            setTimeout(() => {
+                target.style.opacity = '1';
+                target.style.transform = 'translateY(0)';
+            }, 50);
         }
 
-        // Show message
         function showMessage(elId, text, isError = false) {
             const el = document.getElementById(elId);
             el.textContent = text;
             el.className = 'message ' + (isError ? 'error' : 'success');
+            setTimeout(() => el.textContent = '', 5000); // Auto-clear after 5s
         }
 
-        // Registration
-        document.getElementById('registrationForm').addEventListener('submit', async e => {
-            e.preventDefault();
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value;
+        function toggleFunMode() {
+            document.body.classList.toggle('fun-mode');
+        }
 
-            showMessage('registerMessage', 'Creating our bond...', false);
-
-            try {
-                await createUserWithEmailAndPassword(auth, email, password);
-                showMessage('registerMessage', 'Account created! Now login, love. 💌', false);
-                setTimeout(() => switchScreen('loginScreen'), 1800);
-            } catch (err) {
-                let msg = 'Something went wrong.';
-                if (err.code === 'auth/email-already-in-use') msg = 'Email already registered.';
-                if (err.code === 'auth/weak-password') msg = 'Password too weak (min 6 chars).';
-                showMessage('registerMessage', msg + ' ' + err.message, true);
+        // ── Particle & Heart Generators: Enhanced for Performance ───────────────────────
+        function createParticles(count = 80) {
+            const container = document.querySelector('.particles');
+            container.innerHTML = '';
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.width = particle.style.height = `${Math.random() * 8 + 4}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 3}s`;
+                particle.style.background = Math.random() > 0.5 ? 'var(--neon-gold)' : 'var(--neon-blue)';
+                container.appendChild(particle);
             }
-        });
+        }
 
-        // Login + smooth transition to dashboard
-        document.getElementById('loginForm').addEventListener('submit', async e => {
-            e.preventDefault();
-            const email = document.getElementById('loginEmail').value.trim();
-            const password = document.getElementById('loginPassword').value;
-
-            showMessage('loginMessage', 'Opening our love channel...', false);
-
-            try {
-                await signInWithEmailAndPassword(auth, email, password);
-                // onAuthStateChanged will handle redirect
-            } catch (err) {
-                let msg = 'Login failed.';
-                if (err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password') msg = 'Invalid email or password.';
-                showMessage('loginMessage', msg + ' Try again, darling. 💔', true);
+        function createHearts(count = 50) {
+            const container = document.querySelector('.hearts');
+            container.innerHTML = '';
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.animationDelay = `${Math.random() * 6}s`;
+                heart.style.animationDuration = `${6 + Math.random() * 4}s`;
+                heart.addEventListener('click', () => {
+                    heart.classList.add('explode');
+                    setTimeout(() => heart.remove(), 1000);
+                    // Add fun feedback
+                    showMessage('dashboardMessage', 'Heart exploded with love! 💥', false);
+                });
+                container.appendChild(heart);
             }
-        });
+        }
 
-        // Auth state listener – protect dashboard
-        onAuthStateChanged(auth, user => {
-            if (user) {
-                // Logged in → show dashboard if not already
-                if (!document.getElementById('dashboardScreen').classList.contains('active')) {
-                    switchScreen('dashboardScreen');
-                }
-            } else {
-                // Not logged in → force login screen
+        // ── Firebase Auth Module ────────────────────────────────────────────────────────
+        const auth = window.auth;
+        const db = window.db;
+        const storage = window.storage;
+
+        async function registerUser(email, password, username) {
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                await setDoc(doc(db, 'users', user.uid), {
+                    username: username,
+                    bio: 'Welcome to our love story! Edit your bio here.',
+                    createdAt: new Date().toISOString()
+                });
+                return user;
+            } catch (err) {
+                throw err;
+            }
+        }
+
+        async function loginUser(email, password) {
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                return userCredential.user;
+            } catch (err) {
+                throw err;
+            }
+        }
+
+        async function logoutUser() {
+            try {
+                await signOut(auth);
                 switchScreen('loginScreen');
+                showMessage('loginMessage', 'Logged out safely. Come back soon! ❤️', false);
+            } catch (err) {
+                showMessage('dashboardMessage', 'Logout failed: ' + err.message, true);
             }
-        });
-
-        // Certificate (unchanged)
-        function downloadCertificate() {
-            const { jsPDF } = window.jspdf || {}; // assume jspdf loaded if needed – add <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> if using
-            if (!jsPDF) return alert('PDF library not loaded');
-            const doc = new jsPDF();
-            // same enhanced design as before...
-            doc.save('Brian-Merab-Eternal-Bond-Certificate.pdf');
         }
 
-        // Particles & hearts (unchanged – generate on load)
-        function createParticles() { /* ... same as before */ }
-        function createHearts() { /* ... same as before */ }
-        createParticles();
-        createHearts();
+        async function loadUserProfile(user) {
+            try {
+                const userDoc = await getDoc(doc(db, 'users', user.uid));
+                if (userDoc.exists()) {
+                    const data = userDoc.data();
+                    document.getElementById('userDisplayName').textContent = data.username || 'Darling';
+                    document.getElementById('profileDisplay').innerHTML = `<h2>Your Bio</h2><p>${data.bio || 'No bio yet – add one!'}</p>`;
+                    document.getElementById('profileUsername').value = data.username || '';
+                    document.getElementById('profileBio').value = data.bio || '';
+                }
+            } catch (err) {
+                console.error('Profile load error:', err);
+            }
+        }
 
-        // Initial check
-        if (auth.currentUser) switchScreen('dashboardScreen');
+        async function updateUserProfile(user, username, bio) {
+            try {
+                await setDoc(doc(db, 'users', user.uid), { username, bio }, { merge: true });
+                showMessage('profileMessage', 'Profile updated smoothly! 💾', false);
+                loadUserProfile(user);
+                document.getElementById('userDisplayName').textContent = username;
+            } catch (err) {
+                showMessage('profileMessage', 'Update failed: ' + err.message, true);
+            }
+        }
+
+        // ── Cloud Storage Module: Photo Upload & Display ────────────────────────────────
+        async function uploadPhoto(user, file) {
+            try {
+                const storageRef = ref(storage, `photos/\( {user.uid}/ \){file.name}`);
+                await uploadBytes(storageRef, file);
+                const url = await getDownloadURL(storageRef);
+                // Save URL to Firestore (optional expansion)
+                await setDoc(doc(db, 'users', user.uid), { photos: firebase.firestore.FieldValue.arrayUnion(url) }, { merge: true });
+                return url;
+            } catch (err) {
+                throw err;
+            }
+        }
+
+        async function loadGallery(user) {
+            try {
+                const userDoc = await getDoc(doc(db, 'users', user.uid));
+                if (userDoc.exists()) {
+                    const data = userDoc.data();
+                    const photos = data.photos || [];
+                    const container = document.getElementById('galleryContainer');
+                    container.innerHTML = '';
+                    photos.forEach(url => {
+                        const img = document.createElement('img');
+                        img.src = url;
+                        img.alt = 'Uploaded Love Moment';
+                        container.appendChild(img);
+                    });
+                    // Add default photos if none
+                    if (photos.length === 0) {
+                        ['https://files.catbox.moe/spvjqx.jpg', 'https://files.catbox.moe/z544u2.jpg', 'https://files.catbox.moe/b3v2o4.jpg', 'https://files.catbox.moe/tkfvsa.jpg'].forEach(url => {
+                            const img = document.createElement('img');
+                            img.src = url;
+                            img.alt = 'Romantic Moment';
+                            container.appendChild(img);
+                        });
+                    }
+                }
+            } catch (err) {
+                console.error('Gallery load error:', err);
+            }
+        }
+
+        // ── Certificate Module: Personalized with User Data ─────────────────────────────
+        async function generateAndDownloadCertificate(user) {
+            try {
+                const { jsPDF } = window.jspdf;
+                if (!jsPDF) throw new Error('jsPDF not loaded');
+                const doc = new jsPDF();
+                const userDoc = await getDoc(doc(db, 'users', user.uid));
+                const username = userDoc.exists() ? userDoc.data().username : 'Darling';
+
+                // Enhanced design with gradients (simulated), user name
+                doc.setFillColor(255, 105, 180); // Pink base
+                doc.rect(0, 0, 210, 297, 'F');
+                doc.setDrawColor(255, 215, 0);
+                doc.setLineWidth(4);
+                doc.rect(15, 15, 180, 267);
+                doc.setFontSize(50);
+                doc.setTextColor(255, 255, 255);
+                doc.text('Eternal Love Certificate', 105, 60, { align: 'center' });
+                doc.setFontSize(30);
+                doc.setTextColor(0, 0, 0);
+                doc.text(`For ${username} & Partner`, 105, 100, { align: 'center' });
+                doc.text('Bonded Forever in Gradients of Joy', 105, 130, { align: 'center' });
+                doc.text('Anniversary: March 12th Every Year', 105, 160, { align: 'center' });
+                doc.addImage('https://files.catbox.moe/08b4pp.jpg', 'JPEG', 85, 200, 40, 40);
+                doc.setFontSize(18);
+                doc.setTextColor(218, 112, 214);
+                doc.text('With Smoother Vibes & Endless Fun 💖', 105, 260, { align: 'center' });
+                doc.save(`Eternal-Bond-Certificate-${username}.pdf`);
+            } catch (err) {
+                showMessage('certificateMessage', 'Certificate generation failed: ' + err.message, true);
+            }
+        }
+
+        // ── Event Listeners & Initialization ────────────────────────────────────────────
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles(100); // More for fun
+            createHearts(60); // Enhanced density
+
+            // Registration Handler
+            document.getElementById('registrationForm').addEventListener('submit', async e => {
+                e.preventDefault();
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value;
+                const username = document.getElementById('username').value.trim();
+                showMessage('registerMessage', 'Creating your love profile...', false);
+                try {
+                    const user = await registerUser(email, password, username);
+                    showMessage('registerMessage', 'Registered! Login to explore.', false);
+                    setTimeout(() => switchScreen('loginScreen'), 2000);
+                } catch (err) {
+                    showMessage('registerMessage', getFriendlyError(err), true);
+                }
+            });
+
+            // Login Handler
+            document.getElementById('loginForm').addEventListener('submit', async e => {
+                e.preventDefault();
+                const email = document.getElementById('loginEmail').value.trim();
+                const password = document.getElementById('loginPassword').value;
+                showMessage('loginMessage', 'Entering our gradient world...', false);
+                try {
+                    const user = await loginUser(email, password);
+                    switchScreen('dashboardScreen');
+                } catch (err) {
+                    showMessage('loginMessage', getFriendlyError(err), true);
+                }
+            });
+
+            // Profile Update
+            document.getElementById('profileForm').addEventListener('submit', async e => {
+                e.preventDefault();
+                const user = auth.currentUser;
+                if (!user) return;
+                const username = document.getElementById('profileUsername').value.trim();
+                const bio = document.getElementById('profileBio').value.trim();
+                await updateUserProfile(user, username, bio);
+            });
+
+            // Photo Upload
+            document.getElementById('photoUpload').addEventListener('change', async e => {
+                const user = auth.currentUser;
+                if (!user || !e.target.files[0]) return;
+                showMessage('uploadMessage', 'Uploading your love moment...', false);
+                const progressBar = document.getElementById('uploadProgressBar');
+                progressBar.style.width = '0%';
+                try {
+                    const url = await uploadPhoto(user, e.target.files[0]);
+                    showMessage('uploadMessage', 'Uploaded! Refreshing gallery.', false);
+                    progressBar.style.width = '100%';
+                    await loadGallery(user);
+                } catch (err) {
+                    showMessage('uploadMessage', getFriendlyError(err), true);
+                }
+            });
+
+            // Auth State: Expanded with Profile & Gallery Load
+            onAuthStateChanged(auth, async user => {
+                if (user) {
+                    switchScreen('dashboardScreen');
+                    await loadUserProfile(user);
+                    await loadGallery(user);
+                } else {
+                    switchScreen('loginScreen');
+                }
+            });
+
+            function getFriendlyError(err) {
+                let msg = 'An error occurred.';
+                switch (err.code) {
+                    case 'auth/email-already-in-use': msg = 'Email already in use.'; break;
+                    case 'auth/weak-password': msg = 'Password too weak.'; break;
+                    case 'auth/invalid-email': msg = 'Invalid email.'; break;
+                    case 'auth/user-not-found': case 'auth/wrong-password': msg = 'Invalid credentials.'; break;
+                    default: msg += ' ' + err.message;
+                }
+                return msg;
+            }
+        });
     </script>
-    <!-- Optional: jsPDF for certificate -->
+    <!-- jsPDF for Certificates -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
-                    </html>
+                                                              </html>

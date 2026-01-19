@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Eternal Bond - Tech Brian & Merab 💖</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="https://files.catbox.moe/08b4pp.jpg">
+    <style>
+        /* Ultra-Enhanced Romantic Neon Theme: Epic animations, glowing effects, particles, hearts for an amazing, fun bond-strengthening experience */
+        :root {
+            --neon-pink: #ff69b4;
+            --neon-purple: #da70d6;
+            --neon-blue: #00bfff;
+            --neon-gold: #ffd700;
+            --neon-glow: #fff;
+            --bg-dark: #1a1a2e;
+            --text-light: #f0e7f5;
+            --heart-red: #ff1493;
+            --shadow-glow: 0 0 20px rgba(255, 105, 180, 0.5), 0 0 40px rgba(0, 191, 255, 0.3);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark), #0f0f23);
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Sparkling Particles for Magical Fun */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--neon-gold);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: sparkle 2.5s infinite ease-in-out;
+        }
+
+        @keyframes sparkle {
+            0% { transform: scale(0) translateY(0); opacity: 0; }
+            50% { transform: scale(1.2) translateY(-20px); opacity: 1; }
+            100% { transform: scale(0) translateY(-40px); opacity: 0; }
+        }
+
+        /* Interactive Floating Hearts - Click to Explode! */
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 2.5rem;
+            color: var(--heart-red);
+            cursor: pointer;
+            animation: floatHeart 5s infinite ease-in-out, rotateHeart 3s infinite;
+            opacity: 0.5;
+            pointer-events: auto;
+        }
+
+        .heart.explode {
+            animation: explodeHeart 0.8s forwards;
+        }
+
+        @keyframes explodeHeart {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(3) rotate(45deg); opacity: 0; }
+        }
+
+        @keyframes floatHeart {
+            0% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-60vh) scale(1.3); }
+            100% { transform: translateY(-120vh) scale(1); }
+        }
+
+        @keyframes rotateHeart {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Main Container with Epic Pulse */
+        .container {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 25px;
+            padding: 50px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: var(--shadow-glow), 0 0 60px rgba(218, 112, 214, 0.4);
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(20px);
+            animation: epicPulse 1.8s infinite alternate;
+        }
+
+        @keyframes epicPulse {
+            from { box-shadow: var(--shadow-glow); }
+            to { box-shadow: 0 0 30px rgba(255, 105, 180, 0.8), 0 0 50px rgba(218, 112, 214, 0.5), 0 0 70px rgba(0, 191, 255, 0.4); }
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            text-shadow: 0 0 20px var(--neon-pink), 0 0 30px var(--neon-purple), 0 0 40px var(--neon-blue);
+            animation: glowTitle 1.2s infinite alternate;
+        }
+
+        @keyframes glowTitle {
+            from { text-shadow: 0 0 15px var(--neon-pink); }
+            to { text-shadow: 0 0 25px var(--neon-gold), 0 0 35px var(--neon-blue); }
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        input {
+            padding: 14px 45px 14px 14px;
+            border: 2px solid var(--neon-pink);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.12);
+            color: var(--text-light);
+            font-size: 1.1rem;
+            transition: box-shadow 0.4s, transform 0.4s;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 20px var(--neon-purple);
+            transform: scale(1.03);
+        }
+
+        .eye-icon {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--neon-glow);
+            font-size: 1.4rem;
+            transition: color 0.4s;
+        }
+
+        .eye-icon:hover {
+            color: var(--neon-gold);
+        }
+
+        button {
+            padding: 14px;
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple), var(--neon-blue), var(--neon-gold));
+            border: none;
+            border-radius: 10px;
+            color: var(--neon-glow);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.4s, box-shadow 0.4s;
+        }
+
+        button:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 25px var(--neon-pink);
+        }
+
+        .nav-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 25px;
+            gap: 12px;
+        }
+
+        .nav-buttons button {
+            flex: 1 1 45%;
+            padding: 12px;
+            font-size: 1rem;
+        }
+
+        .back-button {
+            margin-top: 25px;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-gold));
+        }
+
+        #message, .loginMessage, .registerMessage {
+            margin-top: 25px;
+            font-size: 1rem;
+            color: var(--neon-glow);
+            animation: fadeIn 0.6s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .story-section {
+            text-align: left;
+            margin-top: 25px;
+            line-height: 1.7;
+            animation: fadeIn 1.2s;
+        }
+
+        .story-section h2 {
+            color: var(--neon-gold);
+            margin-bottom: 12px;
+        }
+
+        .certificate-download {
+            margin-top: 35px;
+        }
+
+        .certificate-download button {
+            background: linear-gradient(135deg, var(--heart-red), var(--neon-gold), var(--neon-pink));
+        }
+
+        /* Romantic Photo Gallery Styles */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .gallery img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 0 15px var(--neon-purple);
+            transition: transform 0.4s, box-shadow 0.4s;
+            animation: fadeIn 1s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 30px var(--neon-gold);
+        }
+
+        /* Hide screens by default */
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        footer {
+            margin-top: 35px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="particles"></div>
+    <div class="hearts"></div>
+    <div class="container">
+        <!-- Login Screen -->
+        <div id="loginScreen" class="screen active">
+            <h1>Our Eternal Bond 💖<br>Tech Brian & Merab</h1>
+            <p>Login for fun adventures in our love world! Let's strengthen our bond together! 🎉</p>
+            <form id="loginForm">
+                <input type="text" id="loginUsername" placeholder="Username (e.g., TechBrian or Merab)" required>
+                <input type="email" id="loginEmail" placeholder="Your Email" required>
+                <div class="input-group">
+                    <input type="password" id="loginPassword" placeholder="Password" required minlength="8">
+                    <span class="eye-icon" onclick="togglePassword('loginPassword')">👁️</span>
+                </div>
+                <button type="submit">Enter Our Magical World 💑</button>
+            </form>
+            <p style="margin-top: 18px;">New here? <a href="#" onclick="switchScreen('registerScreen')" style="color: var(--neon-pink);">Register our epic love</a></p>
+            <div id="loginMessage"></div>
+        </div>
+
+        <!-- Register Screen -->
+        <div id="registerScreen" class="screen">
+            <h1>Start Our Epic Journey 💕<br>Tech Brian & Merab</h1>
+            <p>Register and let's have fun building our stronger bond! 🌹</p>
+            <form id="registrationForm">
+                <input type="text" id="username" placeholder="Username (e.g., TechBrian or Merab)" required>
+                <input type="email" id="email" placeholder="Your Email" required>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Create a Password" required minlength="8">
+                    <span class="eye-icon" onclick="togglePassword('password')">👁️</span>
+                </div>
+                <button type="submit">Register Our Eternal Love 💖</button>
+            </form>
+            <p style="margin-top: 18px;">Already in? <a href="#" onclick="switchScreen('loginScreen')" style="color: var(--neon-pink);">Login to fun</a></p>
+            <div id="registerMessage"></div>
+        </div>
+
+        <!-- Dashboard Screen -->
+        <div id="dashboardScreen" class="screen">
+            <h1>Welcome, My Love! 💞 Let's Have Fun!</h1>
+            <p>Our mega, multi-million valued love app – full of memories, dreams, and endless fun to bond us forever. Anniversary: March 12th every year! 🎂</p>
+            <div class="nav-buttons">
+                <button onclick="switchScreen('pastScreen')">Our Past 🌅</button>
+                <button onclick="switchScreen('presentScreen')">Our Present ✨</button>
+                <button onclick="switchScreen('futureScreen')">Our Future 🚀</button>
+                <button onclick="switchScreen('galleryScreen')">Photo Gallery 📸</button>
+                <button onclick="switchScreen('certificateScreen')">Anniversary Certificate 🎉</button>
+            </div>
+            <footer>Created with infinite ❤️ & fun for Tech Brian & Merab | Nairobi, 2026</footer>
+        </div>
+
+        <!-- Past Screen -->
+        <div id="pastScreen" class="screen">
+            <h1>Our Past: Magical Beginnings 💑</h1>
+            <div class="story-section">
+                <h2>The Spark (2025)</h2>
+                <p>Remember that fateful day in Nairobi when our eyes met? Tech Brian, the innovative coder, and Merab, the creative soul. From coffee dates under the acacia trees to late-night coding sessions intertwined with whispers of dreams. We built our foundation on laughter, trust, and endless adventures – hiking Mount Kenya, stargazing in the savanna, and coding our first app together. Those early struggles? They only made us stronger, turning challenges into cherished memories.</p>
+                <h2>Milestones of Love</h2>
+                <ul>
+                    <li>First kiss: Under the Awasi skyline 🌃</li>
+                    <li>Our tech startup idea: Born from passion and bonding in relationship 💻</li>
+                    <li>Overcoming distance: Virtual dates that felt real ❤️</li>
+                </ul>
+            </div>
+            <button class="back-button" onclick="switchScreen('dashboardScreen')">Back to Dashboard</button>
+        </div>
+
+        <!-- Present Screen -->
+        <div id="presentScreen" class="screen">
+            <h1>Our Present: Thrilling Now 🌟</h1>
+            <div class="story-section">
+                <h2>Today’s Bliss (2026-Now)</h2>
+                <p>In the heart of Nairobi, we're thriving! Tech Brian's apps are revolutionizing lives, while Merab's artistry brings color to our world. We travel Kenya's coasts, code side-by-side, and build a home filled with love. From anniversary surprises to spontaneous dances in the rain – every moment is a testament to our unbreakable bond. We're not just partners; we're soulmates, entrepreneurs, and best friends.</p>
+                <h2>Current Vibes</h2>
+                <ul>
+                    <li>Joint projects: AI for good, inspired by our love 🤖</li>
+                    <li>Daily rituals: Morning calls and evening chats ☕</li>
+                    <li>Growth together: Learning, laughing, loving endlessly 😍</li>
+                </ul>
+            </div>
+            <button class="back-button" onclick="switchScreen('dashboardScreen')">Back to Dashboard</button>
+        </div>
+
+        <!-- Future Screen -->
+        <div id="futureScreen" class="screen">
+            <h1>Our Future: Epic Promises 🚀</h1>
+            <div class="story-section">
+                <h2>Dreams Ahead (2026+)</h2>
+                <p>Picture this: A global tech empire built by us, homes in Nairobi and beyond, little ones carrying our legacy. We'll innovate for a better world, travel the globe hand-in-hand, and grow old sharing stories of our epic love. Challenges? We'll conquer them together. Our future is bright, filled with adventures, achievements, and unwavering devotion. Forever starts now!</p>
+                <h2>Promises</h2>
+                <ul>
+                    <li>World tours: Coding retreats in paradise 🌴</li>
+                    <li>Family legacy: Teaching our kids tech & heart 👨‍👩‍👧‍👦</li>
+                    <li>Eternal vow: To love, support, and dream big 💍</li>
+                </ul>
+            </div>
+            <button class="back-button" onclick="switchScreen('dashboardScreen')">Back to Dashboard</button>
+        </div>
+
+        <!-- Photo Gallery Screen -->
+        <div id="galleryScreen" class="screen">
+            <h1>Our Romantic Gallery 📸💕</h1>
+            <p>Relive our fun moments! Click hearts for explosions & let's bond over these memories. Anniversary vibes every March 12th! 🎊</p>
+            <div class="gallery">
+                <img src="https://files.catbox.moe/spvjqx.jpg" alt="Romantic Moment 1 - Tech Brian & Merab">
+                <img src="https://files.catbox.moe/z544u2.jpg" alt="Romantic Moment 2 - Tech Brian & Merab">
+                <img src="https://files.catbox.moe/b3v2o4.jpg" alt="Romantic Moment 3 - Tech Brian & Merab">
+                <img src="https://files.catbox.moe/tkfvsa.jpg" alt="Romantic Moment 4 - Tech Brian & Merab">
+            </div>
+            <button class="back-button" onclick="switchScreen('dashboardScreen')">Back to Dashboard</button>
+        </div>
+
+        <!-- Certificate Screen -->
+        <div id="certificateScreen" class="screen">
+            <h1>Our Amazing Anniversary Certificate 🎂</h1>
+            <p>Celebrate our love on March 12th every year! Download this cool, enhanced design to cherish our bond. 💌</p>
+            <div class="certificate-download">
+                <button onclick="downloadCertificate()">Download Epic Certificate 📜</button>
+            </div>
+            <button class="back-button" onclick="switchScreen('dashboardScreen')">Back to Dashboard</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        // Initialize EmailJS - Replace with your actual IDs
+        (function() {
+            emailjs.init('fxZYEU8tDj_OsUamkTLKo'); // From EmailJS dashboard
+        })();
+
+        // Local Storage for Users (Demo only; use secure backend in production)
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+
+        // Generate Sparkling Particles
+        function createParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            for (let i = 0; i < 60; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.width = particle.style.height = `${Math.random() * 6 + 3}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 2.5}s`;
+                particle.style.background = Math.random() > 0.5 ? 'var(--neon-gold)' : 'var(--neon-blue)';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // Generate Interactive Floating Hearts
+        function createHearts() {
+            const heartsContainer = document.querySelector('.hearts');
+            for (let i = 0; i < 40; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.animationDelay = `${Math.random() * 5}s`;
+                heart.style.animationDuration = `${5 + Math.random() * 3}s`;
+                heart.addEventListener('click', () => {
+                    heart.classList.add('explode');
+                    setTimeout(() => heart.remove(), 800);
+                });
+                heartsContainer.appendChild(heart);
+            }
+        }
+        createHearts();
+
+        // Toggle Password Visibility
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+
+        // Switch Screens
+        function switchScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        // Registration Form
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const messageDiv = document.getElementById('registerMessage');
+
+            if (password.length < 8) {
+                messageDiv.textContent = 'Password must be at least 8 characters long.';
+                messageDiv.style.color = 'var(--heart-red)';
+                return;
+            }
+
+            if (users.some(u => u.email === email)) {
+                messageDiv.textContent = 'Email already registered.';
+                messageDiv.style.color = 'var(--heart-red)';
+                return;
+            }
+
+            users.push({ username, email, password }); // Demo only
+            localStorage.setItem('users', JSON.stringify(users));
+
+            const templateParams = {
+                to_email: email,
+                to_name: username,
+                from_name: 'Our Eternal Bond',
+                message: `Dearest ${username},\n\nYour heart is now eternally bonded! 💕 Anniversary: March 12th every year!\n\nUsername: ${username}\nEmail: ${email}\n\nDive into our fun app – photos, stories, and more to strengthen our bond. Let's have epic fun, Tech Brian & Merab! 🌟\n\nIf this wasn't you, it's a love sign! 😘`
+            };
+
+            emailjs.send('service_8rvl9xt', 'template_gfval4z', templateParams)
+                .then(() => {
+                    messageDiv.textContent = 'Success! Confirmation sent. Login for fun! 💌';
+                    messageDiv.style.color = 'var(--neon-glow)';
+                    setTimeout(() => switchScreen('loginScreen'), 2000);
+                }, (error) => {
+                    messageDiv.textContent = 'Oops! Email failed. Try again! ❤️';
+                    messageDiv.style.color = 'var(--heart-red)';
+                    console.error('EmailJS error:', error);
+                });
+
+            this.reset();
+        });
+
+        // Login Form
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value.trim();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            const messageDiv = document.getElementById('loginMessage');
+
+            const user = users.find(u => u.username === username && u.email === email && u.password === password);
+            if (user) {
+                messageDiv.textContent = 'Login success! Let's have fun... 🌌';
+                messageDiv.style.color = 'var(--neon-glow)';
+                setTimeout(() => switchScreen('dashboardScreen'), 1500);
+            } else {
+                messageDiv.textContent = 'Invalid? Try again, love! 💔';
+                messageDiv.style.color = 'var(--heart-red)';
+            }
+        });
+
+        // Enhanced Certificate Download (Cool Design)
+        function downloadCertificate() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Background Gradient
+            const gradient = doc.linearGradient(0, 0, 210, 297, ['#ff69b4', '#da70d6', '#00bfff']);
+            doc.setFillColor(gradient);
+            doc.rect(0, 0, 210, 297, 'F');
+            
+            // Border
+            doc.setDrawColor(255, 215, 0); // Gold
+            doc.setLineWidth(3);
+            doc.rect(10, 10, 190, 277);
+            
+            // Title
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(45);
+            doc.setTextColor(255, 255, 255);
+            doc.text('Anniversary Certificate', 105, 50, { align: 'center' });
+            
+            // Hearts Decoration
+            doc.setFontSize(60);
+            doc.setTextColor(255, 20, 147); // Deep Pink
+            doc.text('❤️', 30, 70);
+            doc.text('❤️', 170, 70);
+            
+            // Main Text
+            doc.setFontSize(25);
+            doc.setTextColor(0, 0, 0);
+            doc.text('This Eternally Certifies That', 105, 90, { align: 'center' });
+            doc.setFontSize(35);
+            doc.setTextColor(218, 112, 214); // Orchid
+            doc.text('Tech Brian & Merab', 105, 110, { align: 'center' });
+            doc.setFontSize(22);
+            doc.setTextColor(0, 0, 0);
+            doc.text('Are Bonded in Infinite Love,', 105, 135, { align: 'center' });
+            doc.text('Sharing Epic Past Memories,', 105, 155, { align: 'center' });
+            doc.text('Thrilling Present Joys,', 105, 175, { align: 'center' });
+            doc.text('And a Promising Future Together.', 105, 195, { align: 'center' });
+            doc.text('Anniversary: March 12th Every Year', 105, 215, { align: 'center' });
+            doc.text(`Celebrated on: January 19, 2026`, 105, 235, { align: 'center' });
+            
+            // Seal Icon
+            doc.addImage('https://files.catbox.moe/08b4pp.jpg', 'JPEG', 85, 240, 40, 40);
+            
+            // Footer
+            doc.setFontSize(16);
+            doc.setTextColor(255, 255, 255);
+            doc.text('With Endless Fun & Stronger Bonds 💖', 105, 280, { align: 'center' });
+            
+            doc.save('Brian-Merab-Epic-Anniversary-Certificate.pdf');
+        }
+
+        // PWA Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(() => console.log('Service Worker registered'))
+                .catch(err => console.error('Service Worker error:', err));
+        }
+    </script>
+</body>
+</html>

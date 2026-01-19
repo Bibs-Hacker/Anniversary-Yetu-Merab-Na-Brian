@@ -190,6 +190,10 @@
             box-shadow: 0 0 25px var(--neon-pink);
         }
 
+        button:active {
+            transform: scale(1.02);
+        }
+
         .nav-buttons {
             display: flex;
             flex-wrap: wrap;
@@ -233,6 +237,19 @@
             margin-bottom: 12px;
         }
 
+        .story-section p {
+            margin-bottom: 15px;
+        }
+
+        .story-section ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .story-section li {
+            margin-bottom: 10px;
+        }
+
         .certificate-download {
             margin-top: 35px;
         }
@@ -262,13 +279,16 @@
             box-shadow: 0 0 30px var(--neon-gold);
         }
 
-        /* Hide screens by default */
+        /* Screen Transitions for Smooth Fade */
         .screen {
             display: none;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
         }
 
         .screen.active {
             display: block;
+            opacity: 1;
         }
 
         footer {
@@ -316,10 +336,10 @@
             <div id="registerMessage"></div>
         </div>
 
-        <!-- Dashboard Screen -->
+        <!-- Dashboard Screen (Love Channel) -->
         <div id="dashboardScreen" class="screen">
-            <h1>Welcome, My Love! 💞 Let's Have Fun!</h1>
-            <p>Our mega, multi-million valued love app – full of memories, dreams, and endless fun to bond us forever. Anniversary: March 12th every year! 🎂</p>
+            <h1>Welcome to Our Love Channel, Darling! 💞 Let's Have Fun!</h1>
+            <p>Our massive, multi-million valued love app – packed with endless memories, dreams, photos, and promises to bond us forever in Nairobi and beyond. Anniversary: March 12th every year! 🎂</p>
             <div class="nav-buttons">
                 <button onclick="switchScreen('pastScreen')">Our Past 🌅</button>
                 <button onclick="switchScreen('presentScreen')">Our Present ✨</button>
@@ -327,55 +347,82 @@
                 <button onclick="switchScreen('galleryScreen')">Photo Gallery 📸</button>
                 <button onclick="switchScreen('certificateScreen')">Anniversary Certificate 🎉</button>
             </div>
-            <footer>Created with infinite ❤️ & fun for Tech Brian & Merab | Nairobi, 2026</footer>
+            <footer>Created with infinite ❤️ & fun for Tech Brian & Merab | Nairobi, 2026 – Promising Eternal Adventures!</footer>
         </div>
 
-        <!-- Past Screen -->
+        <!-- Past Screen - Expanded for Massive Content -->
         <div id="pastScreen" class="screen">
-            <h1>Our Past: Magical Beginnings 💑</h1>
+            <h1>Our Past: Magical Beginnings & Epic Tales 💑</h1>
             <div class="story-section">
-                <h2>The Spark (2025)</h2>
-                <p>Remember that fateful day in Nairobi when our eyes met? Tech Brian, the innovative coder, and Merab, the creative soul. From coffee dates under the acacia trees to late-night coding sessions intertwined with whispers of dreams. We built our foundation on laughter, trust, and endless adventures – hiking Mount Kenya, stargazing in the savanna, and coding our first app together. Those early struggles? They only made us stronger, turning challenges into cherished memories.</p>
-                <h2>Milestones of Love</h2>
+                <h2>The Spark That Ignited Us (2018-2020)</h2>
+                <p>Oh, Brian, remember that electric day in bustling Nairobi when our paths crossed? You, Tech Brian, the brilliant coder with dreams as vast as the Kenyan savanna, and me, Merab, the artistic spirit painting life's canvas with vibrant colors. It started with a chance meeting at a tech meetup in Westlands – your passionate talk on AI captivated me, and our first conversation lasted hours, blending code with creativity.</p>
+                <p>From there, our love blossomed like acacia flowers. Those early coffee dates at cozy cafes in Karen, where we'd share ideas over steaming mugs, laughing about buggy code and inspired designs. We ventured into adventures: Hiking the majestic Mount Kenya, hand-in-hand through misty trails, whispering secrets under the stars. Late-night coding sessions turned romantic, with you teaching me Python while I sketched our future apps.</p>
+                <p>But it wasn't all smooth – remember the challenges? Long-distance phases when work pulled us apart, yet our virtual dates via video calls felt so real, filled with virtual tours of Nairobi's hidden gems. We overcame it all, building a foundation of unbreakable trust, endless laughter, and shared passions. Every struggle forged us stronger, turning tears into triumphs.</p>
+                <h2>Milestones That Defined Our Love</h2>
                 <ul>
-                    <li>First kiss: Under the Awasi skyline 🌃</li>
-                    <li>Our tech startup idea: Born from passion and bonding in relationship 💻</li>
-                    <li>Overcoming distance: Virtual dates that felt real ❤️</li>
+                    <li>First Meeting: Tech meetup in Westlands, Nairobi – sparks flew instantly! ⚡</li>
+                    <li>First Date: Coffee at Artcaffe, giggling over shared dreams ☕</li>
+                    <li>First Kiss: Under the glowing Nairobi skyline at Uhuru Park 🌃</li>
+                    <li>Our Tech Startup Idea: Brainstormed during a rainy evening, born from passion and code 💻</li>
+                    <li>Overcoming Distance: Virtual reality dates that bridged miles ❤️</li>
+                    <li>First Trip Together: Safari in Maasai Mara, watching sunsets with wildlife 🦁</li>
+                    <li>Shared Hobbies: Coding marathons mixed with art workshops 🎨</li>
+                    <li>Early Promises: Vowing to build a life of innovation and love 💍</li>
                 </ul>
+                <h2>Memorable Moments & Lessons</h2>
+                <p>We learned to communicate openly, turning arguments into growth opportunities. Your tech savvy complemented my creative flair, creating magic in everything we did. From coding our first joint app to dancing at local festivals, our past is a tapestry of joy, resilience, and deepening affection. Nairobi's vibrant energy fueled us, making every street corner a memory lane.</p>
             </div>
-            <button class="back-button" onclick="switchScreen('dashboardScreen')">Back to Dashboard</button>
+            <button class="back-button" onclick="switchScreen('dashboardScreen')">Back to Love Channel</button>
         </div>
 
-        <!-- Present Screen -->
+        <!-- Present Screen - Expanded for Massive Content -->
         <div id="presentScreen" class="screen">
-            <h1>Our Present: Thrilling Now 🌟</h1>
+            <h1>Our Present: Thrilling Now & Daily Wonders 🌟</h1>
             <div class="story-section">
-                <h2>Today’s Bliss (2026-Now)</h2>
-                <p>In the heart of Nairobi, we're thriving! Tech Brian's apps are revolutionizing lives, while Merab's artistry brings color to our world. We travel Kenya's coasts, code side-by-side, and build a home filled with love. From anniversary surprises to spontaneous dances in the rain – every moment is a testament to our unbreakable bond. We're not just partners; we're soulmates, entrepreneurs, and best friends.</p>
-                <h2>Current Vibes</h2>
+                <h2>Bliss in the Heart of Nairobi (2021-Now)</h2>
+                <p>Right now, Brian, we're living our best life in vibrant Nairobi! You, Tech Brian, are revolutionizing the world with your innovative apps, while I, Merab, infuse our days with artistic beauty. Our home in Nairobi is a sanctuary of love – mornings start with shared breakfasts overlooking the city, evenings with cozy dinners discussing our latest projects.</p>
+                <p>We thrive together: Traveling Kenya's stunning coasts, from Diani's white sands to Lamu's historic charm, creating memories that sparkle like the Indian Ocean. Side-by-side coding sessions where your genius meets my design eye, birthing apps that change lives. Anniversary surprises on March 12th every year – last year's hot air balloon ride over the Rift Valley was pure magic!</p>
+                <p>Spontaneous moments define us: Dancing in the rain during Nairobi's showers, exploring street food markets in Eastlands, or stargazing from our balcony. We're not just partners; we're soulmates, entrepreneurs, adventurers, and eternal best friends. Challenges come, but we tackle them with humor and unity, growing stronger daily.</p>
+                <h2>Current Vibes & Daily Joys</h2>
                 <ul>
-                    <li>Joint projects: AI for good, inspired by our love 🤖</li>
-                    <li>Daily rituals: Morning calls and evening chats ☕</li>
-                    <li>Growth together: Learning, laughing, loving endlessly 😍</li>
+                    <li>Joint Projects: Developing AI tools for social good, inspired by our shared vision 🤖</li>
+                    <li>Daily Rituals: Morning coffee runs and evening walks in Karura Forest ☕🌳</li>
+                    <li>Growth Together: Learning new skills – you teaching me advanced coding, me showing you digital art 😍</li>
+                    <li>Travel Escapes: Weekend getaways to Naivasha's lakes or Aberdare's mountains 🏞️</li>
+                    <li>Social Impact: Volunteering in tech workshops for Nairobi youth 👩‍💻</li>
+                    <li>Romantic Gestures: Surprise notes, custom-coded love messages, artistic portraits 💌</li>
+                    <li>Health & Fun: Yoga sessions and fun runs in the city parks 🧘‍♀️</li>
+                    <li>Celebrations: Marking every milestone with Nairobi's nightlife vibes 🎉</li>
                 </ul>
+                <h2>Our Thriving Bond Today</h2>
+                <p>In this present chapter, our love is a beacon – supportive, passionate, and full of laughter. Nairobi's pulse matches our hearts, promising more adventures. We're building empires while cherishing the little things, like holding hands during traffic jams or brainstorming over nyama choma.</p>
             </div>
-            <button class="back-button" onclick="switchScreen('dashboardScreen')">Back to Dashboard</button>
+            <button class="back-button" onclick="switchScreen('dashboardScreen')">Back to Love Channel</button>
         </div>
 
-        <!-- Future Screen -->
+        <!-- Future Screen - Expanded for Massive Content -->
         <div id="futureScreen" class="screen">
-            <h1>Our Future: Epic Promises 🚀</h1>
+            <h1>Our Future: Epic Promises & Grand Visions 🚀</h1>
             <div class="story-section">
-                <h2>Dreams Ahead (2026+)</h2>
-                <p>Picture this: A global tech empire built by us, homes in Nairobi and beyond, little ones carrying our legacy. We'll innovate for a better world, travel the globe hand-in-hand, and grow old sharing stories of our epic love. Challenges? We'll conquer them together. Our future is bright, filled with adventures, achievements, and unwavering devotion. Forever starts now!</p>
-                <h2>Promises</h2>
+                <h2>Dreams Waiting to Unfold (2026+)</h2>
+                <p>Imagine, Brian, our future unfolding like a grand Nairobi sunrise! We'll build a global tech empire from our Nairobi base, with branches worldwide. Homes in Nairobi's leafy suburbs, a beach villa in Mombasa, and perhaps a cozy spot in the Swiss Alps. Our little ones will inherit our legacy – tech-savvy kids with artistic souls, learning code and creativity from us.</p>
+                <p>We'll innovate for a better world: Apps solving Africa's challenges, art-tech fusions inspiring millions. Travel the globe hand-in-hand – coding retreats in Bali, art festivals in Paris, safaris in Serengeti. Growing old together, sharing stories of our epic journey, with March 12th anniversaries becoming legendary family events.</p>
+                <p>Challenges? We'll conquer them as always, with love as our superpower. Our future is a canvas of possibilities – wealth, impact, family, and eternal devotion. From Nairobi to the world, our bond will shine brighter than ever.</p>
+                <h2>Promises for Tomorrow</h2>
                 <ul>
-                    <li>World tours: Coding retreats in paradise 🌴</li>
-                    <li>Family legacy: Teaching our kids tech & heart 👨‍👩‍👧‍👦</li>
-                    <li>Eternal vow: To love, support, and dream big 💍</li>
+                    <li>Global Adventures: World tours with coding retreats in paradise 🌴</li>
+                    <li>Family Legacy: Raising kids who blend tech and art, teaching them our values 👨‍👩‍👧‍👦</li>
+                    <li>Eternal Vow: To love, support, innovate, and dream big forever 💍</li>
+                    <li>Business Empire: Scaling our startups to multi-million heights 📈</li>
+                    <li>Philanthropy: Giving back to Nairobi communities through tech education ❤️</li>
+                    <li>Personal Growth: Lifelong learning, from AI masters to art residencies 🎓</li>
+                    <li>Romantic Milestones: Renewing vows every decade in exotic locations 🌍</li>
+                    <li>Legacy Building: Writing our story as a book or app for others to inspire 📖</li>
                 </ul>
+                <h2>Vision of Our Promising Horizon</h2>
+                <p>This future promises abundance – financial freedom from our ventures, emotional richness from our bond, and societal impact from our work. Nairobi will always be home, but our love will span continents. Forever starts now, with every day building toward this magnificent tomorrow.</p>
             </div>
-            <button class="back-button" onclick="switchScreen('dashboardScreen')">Back to Dashboard</button>
+            <button class="back-button" onclick="switchScreen('dashboardScreen')">Back to Love Channel</button>
         </div>
 
         <!-- Photo Gallery Screen -->
@@ -383,12 +430,12 @@
             <h1>Our Romantic Gallery 📸💕</h1>
             <p>Relive our fun moments! Click hearts for explosions & let's bond over these memories. Anniversary vibes every March 12th! 🎊</p>
             <div class="gallery">
-                <img src="https://files.catbox.moe/spvjqx.jpg" alt="Romantic Moment 1 - Tech Brian & Merab">
-                <img src="https://files.catbox.moe/z544u2.jpg" alt="Romantic Moment 2 - Tech Brian & Merab">
-                <img src="https://files.catbox.moe/b3v2o4.jpg" alt="Romantic Moment 3 - Tech Brian & Merab">
-                <img src="https://files.catbox.moe/tkfvsa.jpg" alt="Romantic Moment 4 - Tech Brian & Merab">
+                <img src="https://files.catbox.moe/spvjqx.jpg" alt="Romantic Moment 1 - Tech Brian & Merab in Nairobi">
+                <img src="https://files.catbox.moe/z544u2.jpg" alt="Romantic Moment 2 - Adventures with Tech Brian & Merab">
+                <img src="https://files.catbox.moe/b3v2o4.jpg" alt="Romantic Moment 3 - Love in Kenya with Tech Brian & Merab">
+                <img src="https://files.catbox.moe/tkfvsa.jpg" alt="Romantic Moment 4 - Eternal Bond of Tech Brian & Merab">
             </div>
-            <button class="back-button" onclick="switchScreen('dashboardScreen')">Back to Dashboard</button>
+            <button class="back-button" onclick="switchScreen('dashboardScreen')">Back to Love Channel</button>
         </div>
 
         <!-- Certificate Screen -->
@@ -398,20 +445,20 @@
             <div class="certificate-download">
                 <button onclick="downloadCertificate()">Download Epic Certificate 📜</button>
             </div>
-            <button class="back-button" onclick="switchScreen('dashboardScreen')">Back to Dashboard</button>
+            <button class="back-button" onclick="switchScreen('dashboardScreen')">Back to Love Channel</button>
         </div>
     </div>
 
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
-        // Initialize EmailJS - Replace with your actual IDs
+        // Initialize EmailJS - REPLACE THESE WITH YOUR ACTUAL EMAILJS CREDENTIALS!
         (function() {
-            emailjs.init('fxZYEU8tDj_OsUamkTLKo'); // From EmailJS dashboard
+            emailjs.init('fxZYEU8tDj_OsUamkTLKo'); // Get this from EmailJS dashboard after signup
         })();
 
-        // Local Storage for Users (Demo only; use secure backend in production)
-        const users = JSON.parse(localStorage.getItem('users')) || [];
+        // Local Storage for Users (Demo only; for real security, use a backend server)
+        let users = JSON.parse(localStorage.getItem('users')) || [];
 
         // Generate Sparkling Particles
         function createParticles() {
@@ -454,19 +501,36 @@
             input.type = input.type === 'password' ? 'text' : 'password';
         }
 
-        // Switch Screens
+        // Switch Screens with Smooth Fade
         function switchScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('active'));
-            document.getElementById(screenId).classList.add('active');
+            const currentScreen = document.querySelector('.screen.active');
+            if (currentScreen) {
+                currentScreen.style.opacity = 0;
+                setTimeout(() => {
+                    currentScreen.classList.remove('active');
+                    const newScreen = document.getElementById(screenId);
+                    newScreen.classList.add('active');
+                    setTimeout(() => {
+                        newScreen.style.opacity = 1;
+                    }, 100);
+                }, 800); // Match transition duration
+            } else {
+                const newScreen = document.getElementById(screenId);
+                newScreen.classList.add('active');
+                newScreen.style.opacity = 1;
+            }
         }
 
-        // Registration Form
+        // Registration Form - Now with Better Feedback
         document.getElementById('registrationForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const username = document.getElementById('username').value.trim();
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
             const messageDiv = document.getElementById('registerMessage');
+
+            messageDiv.textContent = 'Processing registration... 💕';
+            messageDiv.style.color = 'var(--neon-glow)';
 
             if (password.length < 8) {
                 messageDiv.textContent = 'Password must be at least 8 characters long.';
@@ -480,23 +544,24 @@
                 return;
             }
 
-            users.push({ username, email, password }); // Demo only
+            users.push({ username, email, password }); // Demo only - plaintext insecure!
             localStorage.setItem('users', JSON.stringify(users));
 
             const templateParams = {
                 to_email: email,
                 to_name: username,
                 from_name: 'Our Eternal Bond',
-                message: `Dearest ${username},\n\nYour heart is now eternally bonded! 💕 Anniversary: March 12th every year!\n\nUsername: ${username}\nEmail: ${email}\n\nDive into our fun app – photos, stories, and more to strengthen our bond. Let's have epic fun, Tech Brian & Merab! 🌟\n\nIf this wasn't you, it's a love sign! 😘`
+                message: `Dearest ${username},\n\nYour heart is now eternally bonded! 💕 Anniversary: March 12th every year!\n\nUsername: ${username}\nEmail: ${email}\n\nDive into our massive love channel – packed with stories, photos, and promises. Let's have epic fun, Tech Brian & Merab! 🌟\n\nIf this wasn't you, it's a love sign! 😘`
             };
 
+            // REPLACE 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with actual ones from EmailJS
             emailjs.send('service_8rvl9xt', 'template_gfval4z', templateParams)
                 .then(() => {
-                    messageDiv.textContent = 'Success! Confirmation sent. Login for fun! 💌';
+                    messageDiv.textContent = 'Success! Confirmation sent. Login for our love channel! 💌';
                     messageDiv.style.color = 'var(--neon-glow)';
                     setTimeout(() => switchScreen('loginScreen'), 2000);
                 }, (error) => {
-                    messageDiv.textContent = 'Oops! Email failed. Try again! ❤️';
+                    messageDiv.textContent = 'Oops! Check EmailJS setup or try again. ❤️ (Error: ' + error.text + ')';
                     messageDiv.style.color = 'var(--heart-red)';
                     console.error('EmailJS error:', error);
                 });
@@ -504,7 +569,7 @@
             this.reset();
         });
 
-        // Login Form
+        // Login Form - Smooth Fade to Dashboard (Love Channel)
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const username = document.getElementById('loginUsername').value.trim();
@@ -512,13 +577,15 @@
             const password = document.getElementById('loginPassword').value;
             const messageDiv = document.getElementById('loginMessage');
 
+            messageDiv.textContent = 'Logging in... 🌟';
+            messageDiv.style.color = 'var(--neon-glow)';
+
             const user = users.find(u => u.username === username && u.email === email && u.password === password);
             if (user) {
-                messageDiv.textContent = 'Login success! Let's have fun... 🌌';
-                messageDiv.style.color = 'var(--neon-glow)';
+                messageDiv.textContent = 'Login success! Entering our love channel... 🌌';
                 setTimeout(() => switchScreen('dashboardScreen'), 1500);
             } else {
-                messageDiv.textContent = 'Invalid? Try again, love! 💔';
+                messageDiv.textContent = 'Invalid details? Try again, love! 💔';
                 messageDiv.style.color = 'var(--heart-red)';
             }
         });
@@ -585,4 +652,4 @@
         }
     </script>
 </body>
-</html>
+                        </html>

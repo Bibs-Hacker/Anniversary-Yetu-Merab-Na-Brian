@@ -6,9 +6,8 @@
     <title>Our Eternal Bond - Tech Brian & Merab 💖</title>
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="https://files.catbox.moe/08b4pp.jpg">
-    <!-- three.js for WebGL Skyline -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
+        /* ── Massive Style Expansion: Millions of Styles for Unbelievable Attractiveness ── */
         :root {
             --neon-pink: #ff69b4;
             --neon-purple: #da70d6;
@@ -18,329 +17,770 @@
             --bg-dark: #1a1a2e;
             --text-light: #f0e7f5;
             --heart-red: #ff1493;
-            --romantic-pink: #ffb6c1;
-            --romantic-red: #ff007f;
-            --romantic-purple: #c71585;
-            --romantic-gold: #eee8aa;
             --shadow-glow: 0 0 20px rgba(255, 105, 180, 0.5), 0 0 40px rgba(0, 191, 255, 0.3), 0 0 60px rgba(218, 112, 214, 0.2), 0 0 80px rgba(255, 215, 0, 0.1);
             --gradient-bg: linear-gradient(135deg, var(--bg-dark) 0%, #0f0f23 30%, #1a0033 60%, #000814 100%);
             --gradient-fun: linear-gradient(45deg, var(--neon-pink) 0%, var(--neon-purple) 25%, var(--neon-blue) 50%, var(--neon-gold) 75%, var(--heart-red) 100%);
+            --gradient-rainbow: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+            --gradient-sunset: linear-gradient(120deg, #ff69b4, #ffd700, #da70d6, #00bfff);
+            --gradient-night: linear-gradient(180deg, #000814, #1a1a2e, #0f0f23);
             --gradient-love: linear-gradient(60deg, var(--heart-red), var(--neon-pink), var(--neon-purple));
-            --animation-speed-slow: 12s;
-            --animation-speed-medium: 6s;
-            --animation-speed-fast: 3s;
+            --gradient-magic: radial-gradient(circle, rgba(255,105,180,0.8), rgba(218,112,214,0.6), rgba(0,191,255,0.4), transparent);
+            --animation-speed-slow: 10s;
+            --animation-speed-medium: 5s;
+            --animation-speed-fast: 2s;
+            --particle-size-min: 2px;
+            --particle-size-max: 8px;
+            --heart-size-min: 1.5rem;
+            --heart-size-max: 3.5rem;
+            --confetti-colors: #ff69b4, #da70d6, #00bfff, #ffd700, #ff1493, #ffffff;
+            --skyline-color: #ffd700;
+            --skyline-glow: 0 0 30px #ffd700, 0 0 50px #da70d6;
+            --fun-vibe-intensity: 1.2;
+            --massive-scale: 1.05;
+            --unbelievable-shadow: 0 0 100px rgba(255, 105, 180, 0.3), 0 0 150px rgba(218, 112, 214, 0.2);
+            --extra-fun-border: 2px solid var(--neon-gold);
+            --hover-lift: translateY(-5px) scale(1.03);
+            --active-press: scale(0.98);
+            --text-shadow-fun: 0 0 5px var(--neon-glow), 0 0 10px var(--neon-pink);
+            --bg-overlay: rgba(0, 0, 0, 0.3);
+            --element-padding: 20px;
+            --element-margin: 15px;
+            --font-main: 'Segoe UI', system-ui, sans-serif;
+            --font-fancy: 'Cursive', fantasy;
+            --transition-smooth: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            --transition-fade: opacity 1.5s ease-in-out;
+            --z-index-splash: 10000;
+            --z-index-particles: 1;
+            --z-index-hearts: 2;
+            --z-index-confetti: 3;
+            --z-index-content: 10;
+            --z-index-overlay: 20;
         }
 
         body {
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: var(--font-main);
             background: var(--gradient-bg);
             color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
             margin: 0;
             overflow: hidden;
             position: relative;
             animation: bgPulse var(--animation-speed-slow) infinite alternate;
+            transition: var(--transition-smooth);
         }
 
         @keyframes bgPulse {
             from { background-position: 0% 50%; filter: brightness(1); }
-            to   { background-position: 100% 50%; filter: brightness(1.1); }
+            to { background-position: 100% 50%; filter: brightness(1.1); }
         }
 
-        #webgl-skyline {
+        body.fun-mode {
+            background: var(--gradient-fun);
+            animation: gradientShift var(--animation-speed-medium) infinite alternate, rainbowHue 20s infinite linear;
+            transform: scale(var(--fun-vibe-intensity));
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        @keyframes rainbowHue {
+            0% { filter: hue-rotate(0deg) brightness(1); }
+            100% { filter: hue-rotate(360deg) brightness(1.2); }
+        }
+
+        /* ── Particles: Millions of Fun Vibes ── */
+        .particles {
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 1;
-            opacity: 0.6;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: var(--z-index-particles);
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--neon-glow);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: sparkle var(--animation-speed-fast) infinite ease-in-out, colorShift 4s infinite alternate;
+            box-shadow: 0 0 15px var(--neon-glow), 0 0 25px var(--neon-pink);
+            transition: var(--transition-bounce);
+        }
+
+        @keyframes sparkle {
+            0% { transform: scale(0) translateY(0) rotate(0deg); opacity: 0; }
+            50% { transform: scale(1.8) translateY(-40px) rotate(180deg); opacity: 1; }
+            100% { transform: scale(0) translateY(-80px) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes colorShift {
+            0% { background: var(--neon-pink); box-shadow: 0 0 20px var(--neon-pink); }
+            25% { background: var(--neon-purple); box-shadow: 0 0 20px var(--neon-purple); }
+            50% { background: var(--neon-blue); box-shadow: 0 0 20px var(--neon-blue); }
+            75% { background: var(--neon-gold); box-shadow: 0 0 20px var(--neon-gold); }
+            100% { background: var(--heart-red); box-shadow: 0 0 20px var(--heart-red); }
+        }
+
+        /* ── Hearts: Unbelievable Fun Elements ── */
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: var(--z-index-hearts);
+        }
+
+        .heart {
+            position: absolute;
+            font-size: calc(var(--heart-size-min) + (var(--heart-size-max) - var(--heart-size-min)) * var(--fun-vibe-intensity));
+            color: var(--heart-red);
+            cursor: pointer;
+            animation: floatHeart var(--animation-speed-slow) infinite ease-in-out, rotateHeart var(--animation-speed-medium) infinite, pulseHeart var(--animation-speed-fast) infinite, colorCycle 8s infinite;
+            opacity: 0.8;
+            pointer-events: auto;
+            text-shadow: var(--text-shadow-fun), 0 0 30px var(--heart-red);
+            transition: var(--transition-bounce);
+        }
+
+        .heart:hover {
+            transform: var(--hover-lift);
+            filter: brightness(1.5);
+            text-shadow: 0 0 15px #fff, 0 0 25px var(--neon-pink), 0 0 35px var(--neon-purple);
+        }
+
+        .heart.explode {
+            animation: explodeHeart 1.2s forwards, colorExplosion 0.8s forwards;
             pointer-events: none;
         }
 
+        @keyframes explodeHeart {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(5) rotate(180deg); opacity: 0; }
+        }
+
+        @keyframes colorExplosion {
+            0% { color: var(--heart-red); }
+            50% { color: var(--neon-gold); }
+            100% { color: var(--neon-blue); }
+        }
+
+        @keyframes floatHeart {
+            0% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 10px var(--heart-red)); }
+            50% { transform: translateY(-80vh) scale(1.6); filter: drop-shadow(0 0 30px var(--neon-pink)); }
+            100% { transform: translateY(-160vh) scale(1); filter: drop-shadow(0 0 10px var(--heart-red)); }
+        }
+
+        @keyframes rotateHeart {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(720deg); }
+        }
+
+        @keyframes pulseHeart {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+
+        @keyframes colorCycle {
+            0% { color: var(--heart-red); }
+            20% { color: var(--neon-pink); }
+            40% { color: var(--neon-purple); }
+            60% { color: var(--neon-blue); }
+            80% { color: var(--neon-gold); }
+            100% { color: var(--heart-red); }
+        }
+
+        /* ── Confetti: Millions of Fun Vibes ── */
+        .confetti {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: var(--z-index-confetti);
+            overflow: hidden;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--neon-glow);
+            opacity: 0.9;
+            animation: confettiFall 6s linear infinite, confettiColor 2s infinite alternate, confettiRotate 3s infinite linear;
+            border-radius: 20%;
+            box-shadow: 0 0 10px currentColor;
+            transition: var(--transition-smooth);
+        }
+
+        @keyframes confettiFall {
+            0% { transform: translateY(-100%) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(200vh) rotate(720deg); opacity: 0; }
+        }
+
+        @keyframes confettiColor {
+            0% { background: #ff69b4; box-shadow: 0 0 15px #ff69b4; }
+            16% { background: #da70d6; box-shadow: 0 0 15px #da70d6; }
+            32% { background: #00bfff; box-shadow: 0 0 15px #00bfff; }
+            48% { background: #ffd700; box-shadow: 0 0 15px #ffd700; }
+            64% { background: #ff1493; box-shadow: 0 0 15px #ff1493; }
+            80% { background: #ffffff; box-shadow: 0 0 15px #ffffff; }
+            100% { background: #ff69b4; box-shadow: 0 0 15px #ff69b4; }
+        }
+
+        @keyframes confettiRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ── Splash Screen: Smoother Fade with Skyline ── */
         #splash {
             position: fixed;
-            inset: 0;
-            background: radial-gradient(circle at center, #1a0033 0%, #000814 70%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-night) url('https://static.vecteezy.com/system/resources/thumbnails/017/797/019/small/nairobi-kenya-city-skyline-silhouette-with-black-buildings-and-reflections-isolated-on-white-vector.jpg') no-repeat center bottom / cover;
+            background-blend-mode: overlay;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             z-index: 10000;
-            transition: opacity 2.8s cubic-bezier(0.22, 0.61, 0.36, 1), transform 2.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+            transition: opacity 2.5s cubic-bezier(0.25, 0.1, 0.25, 1), transform 2.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+            opacity: 1;
+            transform: scale(1);
         }
 
         #splash.hidden {
             opacity: 0;
-            transform: scale(1.08);
+            transform: scale(1.1);
             pointer-events: none;
         }
 
+        .love-icon-container {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            animation: float var(--animation-speed-medium) ease-in-out infinite, glowPulse var(--animation-speed-fast) infinite alternate;
+            filter: drop-shadow(0 0 40px var(--neon-pink)) drop-shadow(0 0 60px var(--neon-purple));
+        }
+
         .love-icon {
-            font-size: 220px;
-            background: linear-gradient(45deg, var(--heart-red), var(--neon-pink), var(--neon-purple), var(--neon-gold));
+            font-size: 200px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--gradient-love);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            filter: drop-shadow(0 0 40px var(--neon-pink)) drop-shadow(0 0 70px var(--neon-purple));
-            animation: pulseGlow 3.5s ease-in-out infinite alternate, float 7s ease-in-out infinite;
+            animation: iconSpin 20s linear infinite, colorShift 6s infinite;
+            text-shadow: 0 0 30px var(--neon-glow), 0 0 50px var(--neon-blue);
         }
 
-        @keyframes pulseGlow {
-            from { text-shadow: 0 0 30px var(--neon-pink), 0 0 50px var(--neon-purple); }
-            to   { text-shadow: 0 0 60px var(--neon-pink), 0 0 90px var(--neon-purple), 0 0 120px var(--neon-gold); }
+        @keyframes iconSpin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50%      { transform: translateY(-25px); }
+        @keyframes glowPulse {
+            from { filter: drop-shadow(0 0 20px #ff69b4); }
+            to { filter: drop-shadow(0 0 50px #da70d6); }
         }
 
         .names {
             margin-top: 50px;
-            font-size: 3.2rem;
-            font-weight: 900;
-            background: linear-gradient(90deg, var(--neon-gold), var(--neon-pink), var(--neon-purple));
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: var(--gradient-rainbow);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 0 30px rgba(255,215,0,0.7);
-            animation: breathe 4.5s ease-in-out infinite;
+            text-shadow: 0 0 25px rgba(255,255,255,0.6), 0 0 40px var(--neon-gold);
+            letter-spacing: 3px;
+            animation: namesBreathe var(--animation-speed-medium) ease-in-out infinite, textGradientMove 8s linear infinite;
+            background-size: 400% 400%;
         }
 
-        @keyframes breathe {
-            0%,100% { transform: scale(1); opacity: 0.95; }
-            50%     { transform: scale(1.06); opacity: 1; }
+        @keyframes textGradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        .main-container {
+        @keyframes namesBreathe {
+            0%, 100% { transform: scale(1); opacity: 0.95; }
+            50% { transform: scale(1.08); opacity: 1; }
+        }
+
+        .tagline {
+            margin-top: 25px;
+            font-size: 1.4rem;
+            opacity: 0.9;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 15px rgba(255,255,255,0.5), 0 0 25px var(--neon-blue);
+            animation: taglineFade 4s ease-in-out infinite;
+        }
+
+        @keyframes taglineFade {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        /* ── Main Container: Massive & Unbelievable ── */
+        .container {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 30px;
+            padding: 60px 40px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: var(--unbelievable-shadow), inset 0 0 60px rgba(255, 105, 180, 0.4), 0 0 80px rgba(0, 191, 255, 0.3);
+            text-align: center;
             position: relative;
-            z-index: 10;
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 20px;
-            opacity: 0;
-            transition: opacity 2s ease 0.5s;
+            z-index: var(--z-index-content);
+            backdrop-filter: blur(30px);
+            animation: epicPulse var(--animation-speed-slow) infinite alternate ease-in-out, colorBorder 10s infinite;
+            border: var(--extra-fun-border);
+            transition: var(--transition-smooth);
+            transform: scale(var(--massive-scale));
         }
 
-        .main-container.visible {
-            opacity: 1;
+        .container:hover {
+            box-shadow: 0 0 60px rgba(255, 105, 180, 0.8), 0 0 90px rgba(218, 112, 214, 0.5), 0 0 120px rgba(0, 191, 255, 0.4);
+            transform: scale(calc(var(--massive-scale) * 1.02));
         }
 
-        .section {
-            background: rgba(255,255,255,0.06);
-            border-radius: 28px;
-            padding: 40px;
-            margin-bottom: 50px;
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255,105,180,0.18);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.5), inset 0 0 30px rgba(255,105,180,0.12);
-            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        @keyframes colorBorder {
+            0% { border-color: var(--neon-pink); }
+            25% { border-color: var(--neon-purple); }
+            50% { border-color: var(--neon-blue); }
+            75% { border-color: var(--neon-gold); }
+            100% { border-color: var(--neon-pink); }
         }
 
-        .section:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: 0 25px 70px rgba(218,112,214,0.35), inset 0 0 50px rgba(255,105,180,0.2);
-            border-color: rgba(255,105,180,0.5);
+        h1 {
+            font-size: 3.2rem;
+            margin-bottom: 30px;
+            text-shadow: 0 0 30px var(--neon-pink), 0 0 40px var(--neon-purple), 0 0 50px var(--neon-blue), 0 0 60px var(--neon-gold);
+            animation: glowTitle var(--animation-speed-medium) infinite alternate, textWave 4s infinite;
+            letter-spacing: 2px;
+            font-weight: 900;
         }
 
-        h1, h2 {
-            background: linear-gradient(90deg, var(--neon-pink), var(--neon-gold), var(--neon-purple));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 25px rgba(255,105,180,0.6);
+        @keyframes textWave {
+            0%, 100% { transform: skew(0deg); }
+            50% { transform: skew(5deg); }
         }
 
-        .love-messages {
+        form {
             display: flex;
             flex-direction: column;
-            gap: 35px;
+            gap: 25px;
+            transition: var(--transition-smooth);
         }
 
-        .message-card {
-            background: linear-gradient(135deg, rgba(255,182,193,0.15), rgba(218,112,214,0.12));
-            border-radius: 24px;
-            padding: 35px;
-            border: 1px solid rgba(255,105,180,0.25);
-            box-shadow: 0 10px 35px rgba(0,0,0,0.4), inset 0 0 25px rgba(255,105,180,0.1);
-            transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+        .input-group {
             position: relative;
-            overflow: hidden;
+            animation: inputGlow 3s infinite alternate;
         }
 
-        .message-card::before {
-            content: "💌";
-            position: absolute;
-            font-size: 120px;
-            opacity: 0.08;
-            top: -20px;
-            right: -40px;
-            transform: rotate(-15deg);
-            pointer-events: none;
+        @keyframes inputGlow {
+            from { box-shadow: 0 0 10px var(--neon-pink); }
+            to { box-shadow: 0 0 20px var(--neon-blue); }
         }
 
-        .message-card:hover {
-            transform: translateY(-15px) scale(1.03);
-            box-shadow: 0 30px 80px rgba(255,105,180,0.4), inset 0 0 40px rgba(255,105,180,0.25);
-            border-color: rgba(255,105,180,0.6);
-        }
-
-        .message-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 18px;
-            color: var(--romantic-gold);
-            text-shadow: 0 0 12px rgba(238,232,170,0.7);
-        }
-
-        .message-card p {
-            font-size: 1.15rem;
-            line-height: 1.8;
-            color: #fffde7;
-            letter-spacing: 0.3px;
-        }
-
-        .from-signature {
-            margin-top: 25px;
-            font-style: italic;
-            color: var(--neon-gold);
-            text-align: right;
-            font-size: 1.2rem;
-            text-shadow: 0 0 10px rgba(255,215,0,0.5);
-        }
-
-        .nav-button {
-            display: block;
+        input {
+            padding: 18px 55px 18px 18px;
+            border: 3px solid var(--neon-pink);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--text-light);
+            font-size: 1.3rem;
             width: 100%;
-            max-width: 380px;
-            margin: 30px auto;
-            padding: 20px;
-            font-size: 1.4rem;
-            background: linear-gradient(45deg, var(--heart-red), var(--neon-pink), var(--neon-purple));
-            border: none;
-            border-radius: 50px;
-            color: white;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(255,105,180,0.5);
-            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-sizing: border-box;
+            transition: var(--transition-bounce);
+            box-shadow: inset 0 0 15px rgba(255, 105, 180, 0.3), 0 0 20px rgba(0, 191, 255, 0.2);
         }
 
-        .nav-button:hover {
-            transform: translateY(-8px) scale(1.08);
-            box-shadow: 0 20px 50px rgba(255,105,180,0.7);
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 30px var(--neon-purple), inset 0 0 20px var(--neon-blue), 0 0 40px var(--neon-gold);
+            transform: scale(1.05);
+            border-color: var(--neon-gold);
+        }
+
+        .eye-icon {
+            position: absolute;
+            right: 22px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--neon-glow);
+            font-size: 1.6rem;
+            transition: var(--transition-smooth);
+            animation: eyeBlink 5s infinite;
+        }
+
+        .eye-icon:hover {
+            color: var(--neon-gold);
+            transform: translateY(-50%) scale(1.2) rotate(10deg);
+        }
+
+        @keyframes eyeBlink {
+            0%, 90%, 100% { opacity: 1; }
+            95% { opacity: 0; }
+        }
+
+        button {
+            padding: 18px;
+            background: var(--gradient-fun);
+            border: none;
+            border-radius: 15px;
+            color: var(--neon-glow);
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: var(--transition-bounce);
+            box-shadow: 0 0 25px var(--neon-pink), 0 0 35px var(--neon-purple);
+            background-size: 300% 300%;
+            animation: buttonGradient var(--animation-speed-medium) infinite alternate, buttonPulse 1.5s infinite;
+        }
+
+        button:hover {
+            transform: var(--hover-lift);
+            box-shadow: 0 0 35px var(--neon-pink), 0 0 45px var(--neon-gold), 0 0 55px var(--neon-blue);
+            animation-speed: var(--animation-speed-fast);
+        }
+
+        button:active {
+            transform: var(--active-press);
+            box-shadow: 0 0 20px var(--heart-red);
+        }
+
+        @keyframes buttonPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .nav-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 35px;
+            gap: 18px;
+            animation: navBounce 2s infinite alternate;
+        }
+
+        @keyframes navBounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-5px); }
+        }
+
+        .nav-buttons button {
+            flex: 1 1 45%;
+            padding: 16px;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple), var(--neon-gold));
+            animation: navButtonColor 6s infinite;
+        }
+
+        .nav-buttons button:hover {
+            background: var(--gradient-rainbow);
+            transform: rotate(3deg) scale(1.1);
+        }
+
+        @keyframes navButtonColor {
+            0% { background-position: 0%; }
+            100% { background-position: 100%; }
+        }
+
+        .back-button {
+            margin-top: 35px;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-gold), var(--heart-red));
+            width: 100%;
+            animation: backButtonGlow 4s infinite alternate;
+        }
+
+        @keyframes backButtonGlow {
+            from { box-shadow: 0 0 20px var(--neon-blue); }
+            to { box-shadow: 0 0 40px var(--heart-red); }
+        }
+
+        #message, .loginMessage, .registerMessage {
+            margin-top: 30px;
+            font-size: 1.1rem;
+            color: var(--neon-glow);
+            animation: messageFade var(--animation-speed-fast) ease-in-out;
+            text-shadow: var(--text-shadow-fun);
+            padding: var(--element-padding);
+            border: var(--extra-fun-border);
+            border-radius: 10px;
+            background: var(--bg-overlay);
+            transition: var(--transition-fade);
+        }
+
+        @keyframes messageFade {
+            from { opacity: 0; transform: translateY(10px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .story-section {
+            text-align: left;
+            margin-top: 35px;
+            line-height: 1.9;
+            animation: storyReveal 2s ease;
+            padding: var(--element-padding);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            box-shadow: var(--unbelievable-shadow);
+            border: var(--extra-fun-border);
+            transition: var(--transition-smooth);
+        }
+
+        .story-section:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.02);
+        }
+
+        .story-section h2 {
+            color: var(--neon-gold);
+            margin-bottom: 18px;
+            text-shadow: 0 0 15px var(--neon-gold), 0 0 25px var(--neon-blue);
+            animation: h2Glow var(--animation-speed-medium) infinite alternate, h2Wave 3s infinite;
+            font-size: 2rem;
+        }
+
+        @keyframes h2Wave {
+            0%, 100% { letter-spacing: 1px; }
+            50% { letter-spacing: 3px; }
+        }
+
+        .story-section p {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(0, 191, 255, 0.08);
+            border-radius: 12px;
+            box-shadow: inset 0 0 15px rgba(218, 112, 214, 0.3);
+            transition: var(--transition-bounce);
+        }
+
+        .story-section p:hover {
+            background: rgba(0, 191, 255, 0.15);
+            transform: translateX(5px);
+        }
+
+        .story-section ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .story-section li {
+            margin-bottom: 18px;
+            padding: 15px;
+            background: rgba(255, 105, 180, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 0 20px var(--neon-pink);
+            transition: var(--transition-smooth);
+            animation: liBounce 2s infinite alternate;
+        }
+
+        .story-section li:hover {
+            background: rgba(255, 105, 180, 0.2);
+            transform: translateY(-3px) rotate(1deg);
+        }
+
+        @keyframes liBounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-3px); }
+        }
+
+        .certificate-download {
+            margin-top: 40px;
+            padding: var(--element-padding);
+            background: var(--bg-overlay);
+            border-radius: 15px;
+            box-shadow: var(--unbelievable-shadow);
+            transition: var(--transition-smooth);
+        }
+
+        .certificate-download:hover {
+            background: rgba(255, 105, 180, 0.15);
+        }
+
+        .certificate-download button {
+            background: linear-gradient(135deg, var(--heart-red), var(--neon-gold), var(--neon-pink), var(--neon-blue));
+            animation: certButton 4s infinite;
+        }
+
+        @keyframes certButton {
+            0% { background-position: 0%; }
+            100% { background-position: 400%; }
+        }
+
+        /* ── Screen Classes: Massive Transitions ── */
+        .screen {
+            display: none;
+            opacity: 0;
+            transition: opacity 2s cubic-bezier(0.25, 0.1, 0.25, 1), transform 2s cubic-bezier(0.25, 0.1, 0.25, 1);
+            transform: translateY(30px);
+        }
+
+        .screen.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+            animation: screenEnter 1.5s ease;
+        }
+
+        @keyframes screenEnter {
+            from { opacity: 0; transform: translateY(50px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         footer {
-            text-align: center;
-            padding: 40px 20px;
-            color: rgba(255,255,255,0.7);
-            font-size: 0.95rem;
+            margin-top: 40px;
+            font-size: 1rem;
+            opacity: 0.85;
+            text-shadow: 0 0 10px var(--neon-glow), 0 0 15px var(--neon-blue);
+            animation: footerGlow 5s infinite alternate;
+            padding: var(--element-padding);
+            background: var(--bg-overlay);
+            border-top: var(--extra-fun-border);
+            transition: var(--transition-smooth);
+        }
+
+        footer:hover {
+            opacity: 1;
+            background: rgba(0, 191, 255, 0.1);
+        }
+
+        @keyframes footerGlow {
+            from { text-shadow: 0 0 5px #fff; }
+            to { text-shadow: 0 0 15px #da70d6; }
+        }
+
+        /* ── Audio for Background Song Vibe ── */
+        audio {
+            display: none;
         }
     </style>
 </head>
 <body>
-
-    <!-- WebGL Skyline Canvas -->
-    <canvas id="webgl-skyline"></canvas>
-
-    <!-- Splash Screen -->
+    <div class="particles"></div>
+    <div class="hearts"></div>
+    <div class="confetti"></div>
     <div id="splash">
-        <div class="love-icon">💞</div>
+        <div class="love-icon-container">
+            <div class="love-icon">💖</div>
+        </div>
         <div class="names">Tech Brian & Merab</div>
-        <div style="margin-top:30px; font-size:1.5rem; opacity:0.9; letter-spacing:1px;">
-            Forever starts here… 💫
-        </div>
+        <div class="tagline">Our Massive Love Adventure Awaits! 🚀💕</div>
     </div>
-
-    <!-- Main Content -->
-    <div class="main-container" id="mainContent">
-        <h1 style="font-size:3.8rem; margin-bottom:50px; text-align:center;">Our Eternal Bond</h1>
-
-        <div class="section">
-            <h2 style="font-size:2.6rem; margin-bottom:40px; text-align:center;">Love Letters from Brian to Merab 💌</h2>
-
-            <div class="love-messages">
-                <div class="message-card">
-                    <h3>January 20, 2026 – Morning Thoughts</h3>
-                    <p>Good morning, my beautiful Merab. I woke up thinking about your smile again. That little dimple on your left cheek when you laugh at my terrible jokes… it still makes my heart skip. I love how you light up every room you walk into, even when you're tired or stressed. You're my safe place, my joy, my everything. Can't wait to hold you tonight.</p>
-                    <div class="from-signature">Forever yours, Brian ❤️</div>
-                </div>
-
-                <div class="message-card">
-                    <h3>December 28, 2025 – When You Were Feeling Down</h3>
-                    <p>Hey love, I know today was heavy. I saw it in your eyes. But listen — you are allowed to feel everything you're feeling. You don't have to be strong every second. Lean on me. Cry if you need to. Scream into my chest. I'll hold every piece of you until the storm passes. You're not too much. You're exactly enough. I love all of you — even the parts that feel broken right now. We're in this together, always.</p>
-                    <div class="from-signature">Your safe place, Brian</div>
-                </div>
-
-                <div class="message-card">
-                    <h3>November 15, 2025 – Just Because</h3>
-                    <p>Merab, did you know your laugh is my favorite sound in the world? Not music, not rain, not even the ocean — it's you laughing at something silly I said. I would do anything to hear it every single day for the rest of my life. You're not just my girlfriend. You're my favorite reason to wake up smiling. Thank you for choosing me every day. I choose you forever.</p>
-                    <div class="from-signature">Head over heels, Brian 💕</div>
-                </div>
-
-                <div class="message-card">
-                    <h3>October 3, 2025 – Late Night Confession</h3>
-                    <p>It's 2:17 a.m. and I can't sleep because I keep thinking about how lucky I am. Most people search their whole lives for someone who makes them feel safe, seen, understood. I found that in you before I even knew what I was looking for. You make the hard days bearable and the good days magical. I don't say it enough, but you are the best thing that ever happened to me. I love you more than words can carry.</p>
-                    <div class="from-signature">Yours in every lifetime, Brian</div>
-                </div>
-            </div>
+    <div class="container">
+        <h1>Our Eternal Bond 💖</h1>
+        <p>Welcome to our unbelievable, massive project of love – full of millions of fun vibes and styles! 🌟</p>
+        <div class="story-section">
+            <h2>Our Past: Magical Beginnings</h2>
+            <p>From Nairobi meetings to endless adventures – our story started with sparks and grew into fire! 🔥</p>
+            <ul>
+                <li>First date: Coffee and dreams ☕</li>
+                <li>Adventures: Mountains and stars ✨</li>
+                <li>And so much more...</li>
+            </ul>
         </div>
-
-        <button class="nav-button" onclick="window.location.reload()">
-            Back to Main Love World
-        </button>
-
-        <footer>
-            Nairobi, January 20, 2026 • Made with endless love by Brian for Merab
-        </footer>
+        <div class="story-section">
+            <h2>Our Present: Thrilling Now</h2>
+            <p>Living the dream with fun, massive vibes every day! 🎉</p>
+        </div>
+        <div class="story-section">
+            <h2>Our Future: Unbelievable Promises</h2>
+            <p>A massive project of love awaiting – forever! ∞</p>
+        </div>
+        <div class="gallery">
+            <img src="https://files.catbox.moe/spvjqx.jpg" alt="Love Moment 1">
+            <img src="https://files.catbox.moe/z544u2.jpg" alt="Love Moment 2">
+            <img src="https://files.catbox.moe/b3v2o4.jpg" alt="Love Moment 3">
+            <img src="https://files.catbox.moe/tkfvsa.jpg" alt="Love Moment 4">
+        </div>
+        <div class="certificate-download">
+            <button>Download Our Love Certificate 📜</button>
+        </div>
+        <footer>Created with millions of fun vibes for Tech Brian & Merab | Nairobi, 2026</footer>
     </div>
-
-    <audio autoplay loop volume="0.25">
+    <audio autoplay loop>
         <source src="https://files.catbox.moe/7s5hz5.mp3" type="audio/mpeg">
     </audio>
-
     <script>
-        // Splash fade
+        // ── Generate Massive Particles ──
+        function createParticles() {
+            const container = document.querySelector('.particles');
+            for (let i = 0; i < 200; i++) { // Massive increase
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.width = particle.style.height = `${Math.random() * (var(--particle-size-max) - var(--particle-size-min)) + var(--particle-size-min)}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 3}s`;
+                container.appendChild(particle);
+            }
+        }
+
+        // ── Generate Unbelievable Hearts ──
+        function createHearts() {
+            const container = document.querySelector('.hearts');
+            for (let i = 0; i < 100; i++) { // Massive
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '💖';
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.animationDelay = `${Math.random() * 5}s`;
+                heart.style.animationDuration = `${5 + Math.random() * 3}s`;
+                heart.addEventListener('click', () => {
+                    heart.classList.add('explode');
+                    setTimeout(() => heart.remove(), 1200);
+                });
+                container.appendChild(heart);
+            }
+        }
+
+        // ── Generate Millions of Confetti Vibes ──
+        function createConfetti() {
+            const container = document.querySelector('.confetti');
+            for (let i = 0; i < 300; i++) { // Unbelievable amount
+                const piece = document.createElement('div');
+                piece.classList.add('confetti-piece');
+                piece.style.left = `${Math.random() * 100}%`;
+                piece.style.top = `${Math.random() * 100}%`;
+                piece.style.animationDelay = `${Math.random() * 6}s`;
+                piece.style.animationDuration = `${4 + Math.random() * 4}s`;
+                piece.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                container.appendChild(piece);
+            }
+        }
+
+        // ── Smoother Splash Fade ──
         setTimeout(() => {
             document.getElementById('splash').classList.add('hidden');
-            document.getElementById('mainContent').classList.add('visible');
-        }, 4200);
+        }, 3000);
 
-        // Simple WebGL skyline background
-        const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x000814);
-
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl-skyline'), alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-
-        // Simple glowing city buildings
-        const geometry = new THREE.BoxGeometry(1, 3, 1);
-        const material = new THREE.MeshBasicMaterial({ color: 0xda70d6, wireframe: true });
-
-        for (let i = -15; i <= 15; i += 2) {
-            const building = new THREE.Mesh(geometry, material);
-            building.position.set(i * 1.5, 0, -10);
-            building.scale.y = 1 + Math.random() * 4;
-            scene.add(building);
-        }
-
-        camera.position.z = 20;
-
-        function animate() {
-            requestAnimationFrame(animate);
-            scene.children.forEach(child => {
-                if (child instanceof THREE.Mesh) {
-                    child.rotation.y += 0.001;
-                }
-            });
-            renderer.render(scene, camera);
-        }
-        animate();
-
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
+        // Init Massive Fun
+        createParticles();
+        createHearts();
+        createConfetti();
     </script>
 </body>
-  </html>
+    </html>

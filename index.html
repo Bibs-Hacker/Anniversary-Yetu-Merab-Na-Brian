@@ -6,8 +6,10 @@
     <title>Our Eternal Bond - Tech Brian & Merab 💖</title>
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="https://files.catbox.moe/08b4pp.jpg">
+    <!-- three.js for WebGL Skyline -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
-        /* ── Massive Style Expansion: Millions of Styles for Unbelievable Attractiveness ── */
+        /* ── Unbelievably Massive Styles: Millions of Variations for Attractiveness ── */
         :root {
             --neon-pink: #ff69b4;
             --neon-purple: #da70d6;
@@ -17,45 +19,57 @@
             --bg-dark: #1a1a2e;
             --text-light: #f0e7f5;
             --heart-red: #ff1493;
-            --shadow-glow: 0 0 20px rgba(255, 105, 180, 0.5), 0 0 40px rgba(0, 191, 255, 0.3), 0 0 60px rgba(218, 112, 214, 0.2), 0 0 80px rgba(255, 215, 0, 0.1);
-            --gradient-bg: linear-gradient(135deg, var(--bg-dark) 0%, #0f0f23 30%, #1a0033 60%, #000814 100%);
-            --gradient-fun: linear-gradient(45deg, var(--neon-pink) 0%, var(--neon-purple) 25%, var(--neon-blue) 50%, var(--neon-gold) 75%, var(--heart-red) 100%);
-            --gradient-rainbow: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
-            --gradient-sunset: linear-gradient(120deg, #ff69b4, #ffd700, #da70d6, #00bfff);
-            --gradient-night: linear-gradient(180deg, #000814, #1a1a2e, #0f0f23);
-            --gradient-love: linear-gradient(60deg, var(--heart-red), var(--neon-pink), var(--neon-purple));
-            --gradient-magic: radial-gradient(circle, rgba(255,105,180,0.8), rgba(218,112,214,0.6), rgba(0,191,255,0.4), transparent);
-            --animation-speed-slow: 10s;
-            --animation-speed-medium: 5s;
-            --animation-speed-fast: 2s;
-            --particle-size-min: 2px;
-            --particle-size-max: 8px;
-            --heart-size-min: 1.5rem;
-            --heart-size-max: 3.5rem;
-            --confetti-colors: #ff69b4, #da70d6, #00bfff, #ffd700, #ff1493, #ffffff;
+            --shadow-glow: 0 0 20px rgba(255, 105, 180, 0.5), 0 0 40px rgba(0, 191, 255, 0.3), 0 0 60px rgba(218, 112, 214, 0.2), 0 0 80px rgba(255, 215, 0, 0.1), 0 0 100px rgba(255, 105, 180, 0.3);
+            --gradient-bg: linear-gradient(135deg, var(--bg-dark) 0%, #0f0f23 20%, #1a0033 40%, #000814 60%, #1a1a2e 80%, #0f0f23 100%);
+            --gradient-fun: linear-gradient(45deg, var(--neon-pink) 0%, var(--neon-purple) 20%, var(--neon-blue) 40%, var(--neon-gold) 60%, var(--heart-red) 80%, var(--neon-pink) 100%);
+            --gradient-rainbow: linear-gradient(90deg, #ff0000 0%, #ff7f00 16%, #ffff00 32%, #00ff00 48%, #0000ff 64%, #4b0082 80%, #9400d3 100%);
+            --gradient-sunset: linear-gradient(120deg, #ff69b4 0%, #ffd700 33%, #da70d6 66%, #00bfff 100%);
+            --gradient-night: linear-gradient(180deg, #000814 0%, #1a1a2e 50%, #0f0f23 100%);
+            --gradient-love: linear-gradient(60deg, var(--heart-red) 0%, var(--neon-pink) 50%, var(--neon-purple) 100%);
+            --gradient-magic: radial-gradient(circle, rgba(255,105,180,0.8) 0%, rgba(218,112,214,0.6) 30%, rgba(0,191,255,0.4) 60%, transparent 100%);
+            --gradient-fire: linear-gradient(to top, #ff1493, #ffd700, #ff69b4);
+            --gradient-ocean: linear-gradient(to bottom, #00bfff, #0000ff, #4b0082);
+            --gradient-forest: linear-gradient(45deg, #00ff00, #ffff00, #ff7f00);
+            --gradient-space: radial-gradient(circle at center, #1a0033, #000814, #000);
+            --animation-speed-slow: 12s;
+            --animation-speed-medium: 6s;
+            --animation-speed-fast: 3s;
+            --particle-size-min: 1px;
+            --particle-size-max: 10px;
+            --heart-size-min: 1rem;
+            --heart-size-max: 4rem;
+            --confetti-colors: #ff69b4, #da70d6, #00bfff, #ffd700, #ff1493, #ffffff, #ff0000, #00ff00, #0000ff;
             --skyline-color: #ffd700;
-            --skyline-glow: 0 0 30px #ffd700, 0 0 50px #da70d6;
-            --fun-vibe-intensity: 1.2;
-            --massive-scale: 1.05;
-            --unbelievable-shadow: 0 0 100px rgba(255, 105, 180, 0.3), 0 0 150px rgba(218, 112, 214, 0.2);
-            --extra-fun-border: 2px solid var(--neon-gold);
-            --hover-lift: translateY(-5px) scale(1.03);
-            --active-press: scale(0.98);
-            --text-shadow-fun: 0 0 5px var(--neon-glow), 0 0 10px var(--neon-pink);
-            --bg-overlay: rgba(0, 0, 0, 0.3);
-            --element-padding: 20px;
-            --element-margin: 15px;
+            --skyline-glow: 0 0 30px #ffd700, 0 0 50px #da70d6, 0 0 70px #00bfff;
+            --fun-vibe-intensity: 1.3;
+            --massive-scale: 1.1;
+            --unbelievable-shadow: 0 0 100px rgba(255, 105, 180, 0.3), 0 0 150px rgba(218, 112, 214, 0.2), 0 0 200px rgba(0, 191, 255, 0.1), 0 0 250px rgba(255, 215, 0, 0.05);
+            --extra-fun-border: 3px dashed var(--neon-gold);
+            --hover-lift: translateY(-10px) scale(1.1) rotate(2deg);
+            --active-press: scale(0.95) rotate(-2deg);
+            --text-shadow-fun: 0 0 10px var(--neon-glow), 0 0 20px var(--neon-pink), 0 0 30px var(--neon-purple);
+            --bg-overlay: rgba(0, 0, 0, 0.4);
+            --element-padding: 25px;
+            --element-margin: 20px;
             --font-main: 'Segoe UI', system-ui, sans-serif;
-            --font-fancy: 'Cursive', fantasy;
-            --transition-smooth: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            --transition-fade: opacity 1.5s ease-in-out;
+            --font-fancy: 'Brush Script MT', cursive;
+            --transition-smooth: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+            --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            --transition-fade: opacity 2s ease-in-out;
             --z-index-splash: 10000;
             --z-index-particles: 1;
             --z-index-hearts: 2;
             --z-index-confetti: 3;
+            --z-index-webgl: 4;
             --z-index-content: 10;
             --z-index-overlay: 20;
+            --romantic-pink: #ffb6c1;
+            --romantic-red: #ff007f;
+            --romantic-purple: #c71585;
+            --romantic-gold: #eee8aa;
+            --countdown-color: #ffd700;
+            --lesson-bg: rgba(255, 182, 193, 0.2);
+            --lesson-shadow: 0 0 25px rgba(255, 182, 193, 0.4);
         }
 
         body {
@@ -69,613 +83,198 @@
             margin: 0;
             overflow: hidden;
             position: relative;
-            animation: bgPulse var(--animation-speed-slow) infinite alternate;
+            animation: bgPulse var(--animation-speed-slow) infinite alternate, massiveVibe 15s infinite;
             transition: var(--transition-smooth);
+            transform-origin: center;
         }
 
-        @keyframes bgPulse {
-            from { background-position: 0% 50%; filter: brightness(1); }
-            to { background-position: 100% 50%; filter: brightness(1.1); }
+        @keyframes massiveVibe {
+            0% { filter: brightness(1) saturate(1); }
+            50% { filter: brightness(1.2) saturate(1.5); }
+            100% { filter: brightness(1) saturate(1); }
         }
 
-        body.fun-mode {
-            background: var(--gradient-fun);
-            animation: gradientShift var(--animation-speed-medium) infinite alternate, rainbowHue 20s infinite linear;
-            transform: scale(var(--fun-vibe-intensity));
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 0%; }
-            50% { background-position: 100% 100%; }
-            100% { background-position: 0% 0%; }
-        }
-
-        @keyframes rainbowHue {
-            0% { filter: hue-rotate(0deg) brightness(1); }
-            100% { filter: hue-rotate(360deg) brightness(1.2); }
-        }
-
-        /* ── Particles: Millions of Fun Vibes ── */
-        .particles {
+        /* ── WebGL Skyline Canvas ── */
+        #webgl-skyline {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            z-index: var(--z-index-particles);
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            background: var(--neon-glow);
-            border-radius: 50%;
+            z-index: var(--z-index-webgl);
             opacity: 0.7;
-            animation: sparkle var(--animation-speed-fast) infinite ease-in-out, colorShift 4s infinite alternate;
-            box-shadow: 0 0 15px var(--neon-glow), 0 0 25px var(--neon-pink);
-            transition: var(--transition-bounce);
-        }
-
-        @keyframes sparkle {
-            0% { transform: scale(0) translateY(0) rotate(0deg); opacity: 0; }
-            50% { transform: scale(1.8) translateY(-40px) rotate(180deg); opacity: 1; }
-            100% { transform: scale(0) translateY(-80px) rotate(360deg); opacity: 0; }
-        }
-
-        @keyframes colorShift {
-            0% { background: var(--neon-pink); box-shadow: 0 0 20px var(--neon-pink); }
-            25% { background: var(--neon-purple); box-shadow: 0 0 20px var(--neon-purple); }
-            50% { background: var(--neon-blue); box-shadow: 0 0 20px var(--neon-blue); }
-            75% { background: var(--neon-gold); box-shadow: 0 0 20px var(--neon-gold); }
-            100% { background: var(--heart-red); box-shadow: 0 0 20px var(--heart-red); }
-        }
-
-        /* ── Hearts: Unbelievable Fun Elements ── */
-        .hearts {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
             pointer-events: none;
-            z-index: var(--z-index-hearts);
+            animation: skylineFade 5s infinite alternate;
         }
 
-        .heart {
-            position: absolute;
-            font-size: calc(var(--heart-size-min) + (var(--heart-size-max) - var(--heart-size-min)) * var(--fun-vibe-intensity));
-            color: var(--heart-red);
-            cursor: pointer;
-            animation: floatHeart var(--animation-speed-slow) infinite ease-in-out, rotateHeart var(--animation-speed-medium) infinite, pulseHeart var(--animation-speed-fast) infinite, colorCycle 8s infinite;
-            opacity: 0.8;
-            pointer-events: auto;
-            text-shadow: var(--text-shadow-fun), 0 0 30px var(--heart-red);
-            transition: var(--transition-bounce);
+        @keyframes skylineFade {
+            from { opacity: 0.6; }
+            to { opacity: 0.9; }
         }
 
-        .heart:hover {
-            transform: var(--hover-lift);
-            filter: brightness(1.5);
-            text-shadow: 0 0 15px #fff, 0 0 25px var(--neon-pink), 0 0 35px var(--neon-purple);
-        }
-
-        .heart.explode {
-            animation: explodeHeart 1.2s forwards, colorExplosion 0.8s forwards;
-            pointer-events: none;
-        }
-
-        @keyframes explodeHeart {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(5) rotate(180deg); opacity: 0; }
-        }
-
-        @keyframes colorExplosion {
-            0% { color: var(--heart-red); }
-            50% { color: var(--neon-gold); }
-            100% { color: var(--neon-blue); }
-        }
-
-        @keyframes floatHeart {
-            0% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 10px var(--heart-red)); }
-            50% { transform: translateY(-80vh) scale(1.6); filter: drop-shadow(0 0 30px var(--neon-pink)); }
-            100% { transform: translateY(-160vh) scale(1); filter: drop-shadow(0 0 10px var(--heart-red)); }
-        }
-
-        @keyframes rotateHeart {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(720deg); }
-        }
-
-        @keyframes pulseHeart {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.3); }
-        }
-
-        @keyframes colorCycle {
-            0% { color: var(--heart-red); }
-            20% { color: var(--neon-pink); }
-            40% { color: var(--neon-purple); }
-            60% { color: var(--neon-blue); }
-            80% { color: var(--neon-gold); }
-            100% { color: var(--heart-red); }
-        }
-
-        /* ── Confetti: Millions of Fun Vibes ── */
-        .confetti {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: var(--z-index-confetti);
-            overflow: hidden;
-        }
-
-        .confetti-piece {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background: var(--neon-glow);
-            opacity: 0.9;
-            animation: confettiFall 6s linear infinite, confettiColor 2s infinite alternate, confettiRotate 3s infinite linear;
-            border-radius: 20%;
-            box-shadow: 0 0 10px currentColor;
-            transition: var(--transition-smooth);
-        }
-
-        @keyframes confettiFall {
-            0% { transform: translateY(-100%) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(200vh) rotate(720deg); opacity: 0; }
-        }
-
-        @keyframes confettiColor {
-            0% { background: #ff69b4; box-shadow: 0 0 15px #ff69b4; }
-            16% { background: #da70d6; box-shadow: 0 0 15px #da70d6; }
-            32% { background: #00bfff; box-shadow: 0 0 15px #00bfff; }
-            48% { background: #ffd700; box-shadow: 0 0 15px #ffd700; }
-            64% { background: #ff1493; box-shadow: 0 0 15px #ff1493; }
-            80% { background: #ffffff; box-shadow: 0 0 15px #ffffff; }
-            100% { background: #ff69b4; box-shadow: 0 0 15px #ff69b4; }
-        }
-
-        @keyframes confettiRotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* ── Splash Screen: Smoother Fade with Skyline ── */
+        /* ── Splash Screen: Ultra-Smooth Fade ── */
         #splash {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--gradient-night) url('https://static.vecteezy.com/system/resources/thumbnails/017/797/019/small/nairobi-kenya-city-skyline-silhouette-with-black-buildings-and-reflections-isolated-on-white-vector.jpg') no-repeat center bottom / cover;
-            background-blend-mode: overlay;
+            background: var(--gradient-night);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            z-index: 10000;
-            transition: opacity 2.5s cubic-bezier(0.25, 0.1, 0.25, 1), transform 2.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+            z-index: var(--z-index-splash);
+            transition: opacity 3s cubic-bezier(0.22, 0.61, 0.36, 1), transform 3s cubic-bezier(0.22, 0.61, 0.36, 1);
             opacity: 1;
             transform: scale(1);
         }
 
         #splash.hidden {
             opacity: 0;
-            transform: scale(1.1);
+            transform: scale(1.05) translateY(-20px);
             pointer-events: none;
         }
 
-        .love-icon-container {
-            position: relative;
-            width: 250px;
-            height: 250px;
-            animation: float var(--animation-speed-medium) ease-in-out infinite, glowPulse var(--animation-speed-fast) infinite alternate;
-            filter: drop-shadow(0 0 40px var(--neon-pink)) drop-shadow(0 0 60px var(--neon-purple));
-        }
-
-        .love-icon {
-            font-size: 200px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--gradient-love);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: iconSpin 20s linear infinite, colorShift 6s infinite;
-            text-shadow: 0 0 30px var(--neon-glow), 0 0 50px var(--neon-blue);
-        }
-
-        @keyframes iconSpin {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        @keyframes glowPulse {
-            from { filter: drop-shadow(0 0 20px #ff69b4); }
-            to { filter: drop-shadow(0 0 50px #da70d6); }
-        }
-
-        .names {
-            margin-top: 50px;
-            font-size: 2.8rem;
-            font-weight: 800;
-            background: var(--gradient-rainbow);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 25px rgba(255,255,255,0.6), 0 0 40px var(--neon-gold);
-            letter-spacing: 3px;
-            animation: namesBreathe var(--animation-speed-medium) ease-in-out infinite, textGradientMove 8s linear infinite;
-            background-size: 400% 400%;
-        }
-
-        @keyframes textGradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes namesBreathe {
-            0%, 100% { transform: scale(1); opacity: 0.95; }
-            50% { transform: scale(1.08); opacity: 1; }
-        }
-
-        .tagline {
-            margin-top: 25px;
-            font-size: 1.4rem;
-            opacity: 0.9;
-            letter-spacing: 1.5px;
-            text-shadow: 0 0 15px rgba(255,255,255,0.5), 0 0 25px var(--neon-blue);
-            animation: taglineFade 4s ease-in-out infinite;
-        }
-
-        @keyframes taglineFade {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
-        }
-
-        /* ── Main Container: Massive & Unbelievable ── */
+        /* ── Main Container: Interactive & Massive ── */
         .container {
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 30px;
-            padding: 60px 40px;
-            max-width: 600px;
-            width: 90%;
-            box-shadow: var(--unbelievable-shadow), inset 0 0 60px rgba(255, 105, 180, 0.4), 0 0 80px rgba(0, 191, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 35px;
+            padding: 70px 50px;
+            max-width: 650px;
+            width: 95%;
+            box-shadow: var(--unbelievable-shadow), inset 0 0 70px rgba(255, 105, 180, 0.5);
             text-align: center;
             position: relative;
             z-index: var(--z-index-content);
-            backdrop-filter: blur(30px);
-            animation: epicPulse var(--animation-speed-slow) infinite alternate ease-in-out, colorBorder 10s infinite;
+            backdrop-filter: blur(35px);
+            animation: epicPulse var(--animation-speed-slow) infinite alternate ease-in-out, massiveShake 20s infinite;
             border: var(--extra-fun-border);
-            transition: var(--transition-smooth);
+            transition: var(--transition-bounce);
             transform: scale(var(--massive-scale));
         }
 
         .container:hover {
-            box-shadow: 0 0 60px rgba(255, 105, 180, 0.8), 0 0 90px rgba(218, 112, 214, 0.5), 0 0 120px rgba(0, 191, 255, 0.4);
-            transform: scale(calc(var(--massive-scale) * 1.02));
+            transform: scale(calc(var(--massive-scale) * 1.05)) rotate(1deg);
+            box-shadow: 0 0 50px rgba(255, 105, 180, 0.9), 0 0 80px rgba(218, 112, 214, 0.6), 0 0 110px rgba(0, 191, 255, 0.5), 0 0 140px rgba(255, 215, 0, 0.4);
         }
 
-        @keyframes colorBorder {
-            0% { border-color: var(--neon-pink); }
-            25% { border-color: var(--neon-purple); }
-            50% { border-color: var(--neon-blue); }
-            75% { border-color: var(--neon-gold); }
-            100% { border-color: var(--neon-pink); }
+        @keyframes massiveShake {
+            0%, 100% { transform: scale(var(--massive-scale)) rotate(0deg); }
+            25% { transform: scale(var(--massive-scale)) rotate(0.5deg); }
+            50% { transform: scale(var(--massive-scale)) rotate(-0.5deg); }
+            75% { transform: scale(var(--massive-scale)) rotate(0.5deg); }
         }
 
-        h1 {
-            font-size: 3.2rem;
-            margin-bottom: 30px;
-            text-shadow: 0 0 30px var(--neon-pink), 0 0 40px var(--neon-purple), 0 0 50px var(--neon-blue), 0 0 60px var(--neon-gold);
-            animation: glowTitle var(--animation-speed-medium) infinite alternate, textWave 4s infinite;
-            letter-spacing: 2px;
-            font-weight: 900;
-        }
-
-        @keyframes textWave {
-            0%, 100% { transform: skew(0deg); }
-            50% { transform: skew(5deg); }
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-            transition: var(--transition-smooth);
-        }
-
-        .input-group {
-            position: relative;
-            animation: inputGlow 3s infinite alternate;
-        }
-
-        @keyframes inputGlow {
-            from { box-shadow: 0 0 10px var(--neon-pink); }
-            to { box-shadow: 0 0 20px var(--neon-blue); }
-        }
-
-        input {
-            padding: 18px 55px 18px 18px;
-            border: 3px solid var(--neon-pink);
-            border-radius: 15px;
-            background: rgba(255, 255, 255, 0.15);
-            color: var(--text-light);
-            font-size: 1.3rem;
-            width: 100%;
-            box-sizing: border-box;
-            transition: var(--transition-bounce);
-            box-shadow: inset 0 0 15px rgba(255, 105, 180, 0.3), 0 0 20px rgba(0, 191, 255, 0.2);
-        }
-
-        input:focus {
-            outline: none;
-            box-shadow: 0 0 30px var(--neon-purple), inset 0 0 20px var(--neon-blue), 0 0 40px var(--neon-gold);
-            transform: scale(1.05);
-            border-color: var(--neon-gold);
-        }
-
-        .eye-icon {
-            position: absolute;
-            right: 22px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: var(--neon-glow);
-            font-size: 1.6rem;
-            transition: var(--transition-smooth);
-            animation: eyeBlink 5s infinite;
-        }
-
-        .eye-icon:hover {
-            color: var(--neon-gold);
-            transform: translateY(-50%) scale(1.2) rotate(10deg);
-        }
-
-        @keyframes eyeBlink {
-            0%, 90%, 100% { opacity: 1; }
-            95% { opacity: 0; }
-        }
-
-        button {
-            padding: 18px;
-            background: var(--gradient-fun);
+        /* ── Interactive Buttons ── */
+        .nav-button {
+            padding: 20px;
+            background: var(--gradient-love);
             border: none;
-            border-radius: 15px;
-            color: var(--neon-glow);
-            font-size: 1.4rem;
-            cursor: pointer;
-            transition: var(--transition-bounce);
-            box-shadow: 0 0 25px var(--neon-pink), 0 0 35px var(--neon-purple);
-            background-size: 300% 300%;
-            animation: buttonGradient var(--animation-speed-medium) infinite alternate, buttonPulse 1.5s infinite;
-        }
-
-        button:hover {
-            transform: var(--hover-lift);
-            box-shadow: 0 0 35px var(--neon-pink), 0 0 45px var(--neon-gold), 0 0 55px var(--neon-blue);
-            animation-speed: var(--animation-speed-fast);
-        }
-
-        button:active {
-            transform: var(--active-press);
-            box-shadow: 0 0 20px var(--heart-red);
-        }
-
-        @keyframes buttonPulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .nav-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 35px;
-            gap: 18px;
-            animation: navBounce 2s infinite alternate;
-        }
-
-        @keyframes navBounce {
-            from { transform: translateY(0); }
-            to { transform: translateY(-5px); }
-        }
-
-        .nav-buttons button {
-            flex: 1 1 45%;
-            padding: 16px;
-            font-size: 1.2rem;
-            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple), var(--neon-gold));
-            animation: navButtonColor 6s infinite;
-        }
-
-        .nav-buttons button:hover {
-            background: var(--gradient-rainbow);
-            transform: rotate(3deg) scale(1.1);
-        }
-
-        @keyframes navButtonColor {
-            0% { background-position: 0%; }
-            100% { background-position: 100%; }
-        }
-
-        .back-button {
-            margin-top: 35px;
-            background: linear-gradient(135deg, var(--neon-blue), var(--neon-gold), var(--heart-red));
-            width: 100%;
-            animation: backButtonGlow 4s infinite alternate;
-        }
-
-        @keyframes backButtonGlow {
-            from { box-shadow: 0 0 20px var(--neon-blue); }
-            to { box-shadow: 0 0 40px var(--heart-red); }
-        }
-
-        #message, .loginMessage, .registerMessage {
-            margin-top: 30px;
-            font-size: 1.1rem;
-            color: var(--neon-glow);
-            animation: messageFade var(--animation-speed-fast) ease-in-out;
-            text-shadow: var(--text-shadow-fun);
-            padding: var(--element-padding);
-            border: var(--extra-fun-border);
-            border-radius: 10px;
-            background: var(--bg-overlay);
-            transition: var(--transition-fade);
-        }
-
-        @keyframes messageFade {
-            from { opacity: 0; transform: translateY(10px) scale(0.9); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        .story-section {
-            text-align: left;
-            margin-top: 35px;
-            line-height: 1.9;
-            animation: storyReveal 2s ease;
-            padding: var(--element-padding);
-            background: rgba(255, 255, 255, 0.05);
             border-radius: 20px;
-            box-shadow: var(--unbelievable-shadow);
-            border: var(--extra-fun-border);
-            transition: var(--transition-smooth);
-        }
-
-        .story-section:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: scale(1.02);
-        }
-
-        .story-section h2 {
-            color: var(--neon-gold);
-            margin-bottom: 18px;
-            text-shadow: 0 0 15px var(--neon-gold), 0 0 25px var(--neon-blue);
-            animation: h2Glow var(--animation-speed-medium) infinite alternate, h2Wave 3s infinite;
-            font-size: 2rem;
-        }
-
-        @keyframes h2Wave {
-            0%, 100% { letter-spacing: 1px; }
-            50% { letter-spacing: 3px; }
-        }
-
-        .story-section p {
-            margin-bottom: 25px;
-            padding: 15px;
-            background: rgba(0, 191, 255, 0.08);
-            border-radius: 12px;
-            box-shadow: inset 0 0 15px rgba(218, 112, 214, 0.3);
+            color: var(--neon-glow);
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin: 15px 0;
+            width: 100%;
             transition: var(--transition-bounce);
+            box-shadow: 0 0 30px var(--neon-pink);
+            animation: buttonHoverReady 2s infinite;
+            text-shadow: var(--text-shadow-fun);
         }
 
-        .story-section p:hover {
-            background: rgba(0, 191, 255, 0.15);
-            transform: translateX(5px);
+        .nav-button:hover {
+            transform: var(--hover-lift);
+            background: var(--gradient-rainbow);
+            box-shadow: 0 0 40px var(--neon-gold), 0 0 50px var(--neon-blue);
+            animation: buttonExplodeColors 1s infinite;
         }
 
-        .story-section ul {
-            list-style-type: none;
-            padding-left: 0;
+        @keyframes buttonHoverReady {
+            0% { box-shadow: 0 0 20px var(--neon-pink); }
+            100% { box-shadow: 0 0 30px var(--neon-purple); }
         }
 
-        .story-section li {
-            margin-bottom: 18px;
-            padding: 15px;
-            background: rgba(255, 105, 180, 0.1);
-            border-radius: 10px;
-            box-shadow: 0 0 20px var(--neon-pink);
-            transition: var(--transition-smooth);
-            animation: liBounce 2s infinite alternate;
-        }
-
-        .story-section li:hover {
-            background: rgba(255, 105, 180, 0.2);
-            transform: translateY(-3px) rotate(1deg);
-        }
-
-        @keyframes liBounce {
-            from { transform: translateY(0); }
-            to { transform: translateY(-3px); }
-        }
-
-        .certificate-download {
-            margin-top: 40px;
-            padding: var(--element-padding);
-            background: var(--bg-overlay);
-            border-radius: 15px;
-            box-shadow: var(--unbelievable-shadow);
-            transition: var(--transition-smooth);
-        }
-
-        .certificate-download:hover {
-            background: rgba(255, 105, 180, 0.15);
-        }
-
-        .certificate-download button {
-            background: linear-gradient(135deg, var(--heart-red), var(--neon-gold), var(--neon-pink), var(--neon-blue));
-            animation: certButton 4s infinite;
-        }
-
-        @keyframes certButton {
+        @keyframes buttonExplodeColors {
             0% { background-position: 0%; }
-            100% { background-position: 400%; }
+            100% { background-position: 300%; }
         }
 
-        /* ── Screen Classes: Massive Transitions ── */
-        .screen {
-            display: none;
-            opacity: 0;
-            transition: opacity 2s cubic-bezier(0.25, 0.1, 0.25, 1), transform 2s cubic-bezier(0.25, 0.1, 0.25, 1);
-            transform: translateY(30px);
+        /* ── Period Tracker Screen: Romantic & Interactive ── */
+        #periodTrackerScreen {
+            padding: 30px;
+            background: var(--lesson-bg);
+            border-radius: 25px;
+            box-shadow: var(--lesson-shadow), 0 0 50px var(--romantic-pink);
+            text-align: left;
+            animation: trackerPulse 3s infinite alternate;
         }
 
-        .screen.active {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-            animation: screenEnter 1.5s ease;
+        @keyframes trackerPulse {
+            from { background: rgba(255, 182, 193, 0.2); }
+            to { background: rgba(255, 182, 193, 0.3); }
         }
 
-        @keyframes screenEnter {
-            from { opacity: 0; transform: translateY(50px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+        .countdown {
+            font-size: 2.5rem;
+            color: var(--countdown-color);
+            text-shadow: 0 0 20px var(--neon-gold);
+            margin-bottom: 30px;
+            animation: countdownGlow 2s infinite alternate;
         }
 
-        footer {
-            margin-top: 40px;
-            font-size: 1rem;
-            opacity: 0.85;
-            text-shadow: 0 0 10px var(--neon-glow), 0 0 15px var(--neon-blue);
-            animation: footerGlow 5s infinite alternate;
-            padding: var(--element-padding);
-            background: var(--bg-overlay);
-            border-top: var(--extra-fun-border);
+        @keyframes countdownGlow {
+            from { text-shadow: 0 0 10px #ffd700; }
+            to { text-shadow: 0 0 30px #ff69b4; }
+        }
+
+        .lesson {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 0 25px var(--romantic-purple);
             transition: var(--transition-smooth);
         }
 
-        footer:hover {
-            opacity: 1;
-            background: rgba(0, 191, 255, 0.1);
+        .lesson:hover {
+            transform: scale(1.03);
+            background: rgba(255, 255, 255, 0.15);
         }
 
-        @keyframes footerGlow {
-            from { text-shadow: 0 0 5px #fff; }
-            to { text-shadow: 0 0 15px #da70d6; }
+        .lesson h3 {
+            color: var(--romantic-red);
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px var(--romantic-pink);
         }
 
-        /* ── Audio for Background Song Vibe ── */
-        audio {
-            display: none;
+        .lesson ul {
+            list-style-type: heart; /* Custom love list */
+            padding-left: 25px;
+        }
+
+        .lesson li {
+            margin-bottom: 12px;
+            animation: liLoveBeat 1.5s infinite;
+        }
+
+        @keyframes liLoveBeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); color: var(--heart-red); }
+        }
+
+        /* ── Love Messages ── */
+        .love-message {
+            font-style: italic;
+            color: var(--romantic-gold);
+            margin-top: 20px;
+            text-shadow: 0 0 10px var(--romantic-purple);
+            animation: loveFade 4s infinite;
+        }
+
+        @keyframes loveFade {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
         }
     </style>
 </head>
@@ -683,104 +282,181 @@
     <div class="particles"></div>
     <div class="hearts"></div>
     <div class="confetti"></div>
+    <canvas id="webgl-skyline"></canvas>
     <div id="splash">
         <div class="love-icon-container">
             <div class="love-icon">💖</div>
         </div>
         <div class="names">Tech Brian & Merab</div>
-        <div class="tagline">Our Massive Love Adventure Awaits! 🚀💕</div>
+        <div class="tagline">Our Unbelievable Love World! 💫</div>
     </div>
-    <div class="container">
+    <div class="container" id="mainScreen">
         <h1>Our Eternal Bond 💖</h1>
-        <p>Welcome to our unbelievable, massive project of love – full of millions of fun vibes and styles! 🌟</p>
+        <p>Hey Merab, my love – this massive, interactive world is all for us! Full of fun, animations, and my endless love for you. 😍</p>
+        <button class="nav-button" onclick="switchScreen('periodTrackerScreen')">My Special Period Tracker ❤️ (For You, Merab)</button>
         <div class="story-section">
-            <h2>Our Past: Magical Beginnings</h2>
-            <p>From Nairobi meetings to endless adventures – our story started with sparks and grew into fire! 🔥</p>
-            <ul>
-                <li>First date: Coffee and dreams ☕</li>
-                <li>Adventures: Mountains and stars ✨</li>
-                <li>And so much more...</li>
-            </ul>
+            <h2>Our Past: Where Love Began</h2>
+            <p>Merab, remember our first moments? Every memory makes me love you more! 💕</p>
         </div>
         <div class="story-section">
-            <h2>Our Present: Thrilling Now</h2>
-            <p>Living the dream with fun, massive vibes every day! 🎉</p>
+            <h2>Our Present: Loving You Now</h2>
+            <p>Every day with you is a fun adventure, my darling Merab. You're my world! 🌍❤️</p>
         </div>
         <div class="story-section">
-            <h2>Our Future: Unbelievable Promises</h2>
-            <p>A massive project of love awaiting – forever! ∞</p>
+            <h2>Our Future: Forever Together</h2>
+            <p>Merab, our love will grow massively – I promise! 💑</p>
         </div>
         <div class="gallery">
-            <img src="https://files.catbox.moe/spvjqx.jpg" alt="Love Moment 1">
-            <img src="https://files.catbox.moe/z544u2.jpg" alt="Love Moment 2">
-            <img src="https://files.catbox.moe/b3v2o4.jpg" alt="Love Moment 3">
-            <img src="https://files.catbox.moe/tkfvsa.jpg" alt="Love Moment 4">
+            <img src="https://files.catbox.moe/spvjqx.jpg" alt="Our Love 1" onclick="imageInteract(this)">
+            <img src="https://files.catbox.moe/z544u2.jpg" alt="Our Love 2" onclick="imageInteract(this)">
+            <img src="https://files.catbox.moe/b3v2o4.jpg" alt="Our Love 3" onclick="imageInteract(this)">
+            <img src="https://files.catbox.moe/tkfvsa.jpg" alt="Our Love 4" onclick="imageInteract(this)">
         </div>
-        <div class="certificate-download">
-            <button>Download Our Love Certificate 📜</button>
+        <footer>Merab, my heart beats for you – always! 💓 From Brian</footer>
+    </div>
+    <div class="container" id="periodTrackerScreen" style="display: none;">
+        <h1>Merab's Special Tracker 💕</h1>
+        <p>My dearest Merab, I made this just for you – to help with your irregular cycles. I love you so much! 😘</p>
+        <div class="countdown" id="countdown">Estimated Days Until Next Period: Calculating...</div>
+        <div class="lesson">
+            <h3>Lesson from Teacher Brian: What to Do During Periods</h3>
+            <ul>
+                <li>Rest plenty, my love – your body needs it! 🛏️</li>
+                <li>Stay hydrated with water and herbal teas. 💧</li>
+                <li>Use heat pads for cramps – I'll get one for you! 🔥</li>
+                <li>Light exercise like walking to ease pain. 🚶‍♀️</li>
+                <li>Eat nutritious foods – more on that below.</li>
+            </ul>
         </div>
-        <footer>Created with millions of fun vibes for Tech Brian & Merab | Nairobi, 2026</footer>
+        <div class="lesson">
+            <h3>What NOT to Do</h3>
+            <ul>
+                <li>Avoid heavy lifting or strenuous activities. 🚫</li>
+                <li>Don't skip meals – keep energy up! 🍽️</li>
+                <li>Avoid caffeine and alcohol – they can worsen cramps.</li>
+                <li>Don't stress – I'm here for you, Merab! 🤗</li>
+            </ul>
+        </div>
+        <div class="lesson">
+            <h3>How to Behave & Feel Better</h3>
+            <ul>
+                <li>Be kind to yourself – pamper time! 🛀</li>
+                <li>Communicate if you need space or cuddles. 💬</li>
+                <li>Track moods – journal helps! 📓</li>
+                <li>Remember, it's normal – you're strong, my love! 💪❤️</li>
+            </ul>
+        </div>
+        <div class="lesson">
+            <h3>Foods to Take</h3>
+            <ul>
+                <li>Bananas for potassium – reduces cramps. 🍌</li>
+                <li>Dark chocolate for mood boost (in moderation!). 🍫</li>
+                <li>Leafy greens like spinach for iron. 🥬</li>
+                <li>Ginger tea for nausea relief. ☕</li>
+                <li>Nuts & seeds for healthy fats. 🥜</li>
+            </ul>
+        </div>
+        <div class="lesson">
+            <h3>Foods to Avoid</h3>
+            <ul>
+                <li>Salty foods – increase bloating. 🧂🚫</li>
+                <li>Sugary treats – can worsen mood swings.</li>
+                <li>Fatty meats – hard to digest.</li>
+                <li>Caffeine – dehydrates you.</li>
+            </ul>
+        </div>
+        <div class="lesson">
+            <h3>Safe Days & Tips</h3>
+            <ul>
+                <li>Safe days approx. 8-20 in cycle – but track carefully!</li>
+                <li>Use apps or calendar – I'm here to help, Merab.</li>
+                <li>Always use protection if unsure. 🛡️</li>
+                <li>Irregular? See doc – your health first! 🩺</li>
+            </ul>
+        </div>
+        <p class="love-message">Merab, every part of you is perfect to me. I love you endlessly – Brian ❤️</p>
+        <button class="nav-button" onclick="switchScreen('mainScreen')">Back to Main Love World</button>
     </div>
     <audio autoplay loop>
         <source src="https://files.catbox.moe/7s5hz5.mp3" type="audio/mpeg">
     </audio>
     <script>
-        // ── Generate Massive Particles ──
-        function createParticles() {
-            const container = document.querySelector('.particles');
-            for (let i = 0; i < 200; i++) { // Massive increase
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                particle.style.width = particle.style.height = `${Math.random() * (var(--particle-size-max) - var(--particle-size-min)) + var(--particle-size-min)}px`;
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100}%`;
-                particle.style.animationDelay = `${Math.random() * 3}s`;
-                container.appendChild(particle);
-            }
+        // ── Switch Screens Interactively ──
+        function switchScreen(screenId) {
+            document.getElementById('mainScreen').style.display = screenId === 'mainScreen' ? 'block' : 'none';
+            document.getElementById('periodTrackerScreen').style.display = screenId === 'periodTrackerScreen' ? 'block' : 'none';
         }
 
-        // ── Generate Unbelievable Hearts ──
-        function createHearts() {
+        // ── Live Countdown for Merab ──
+        function updateCountdown() {
+            const lastPeriod = new Date('2025-12-28'); // Towards end of month
+            const averageCycle = 28; // Irregular estimate
+            const nextPeriod = new Date(lastPeriod);
+            nextPeriod.setDate(lastPeriod.getDate() + averageCycle);
+            const now = new Date();
+            const daysUntil = Math.ceil((nextPeriod - now) / (1000 * 60 * 60 * 24));
+            document.getElementById('countdown').textContent = `My Love Merab, Estimated Days Until Next Period: ${daysUntil > 0 ? daysUntil : 'Might be today - take care!'}`;
+        }
+
+        // ── Image Interact: Fun Love Explosion ──
+        function imageInteract(img) {
+            img.style.transform = 'scale(1.2) rotate(10deg)';
+            setTimeout(() => img.style.transform = '', 500);
+            createTemporaryHearts(20); // Massive love burst
+        }
+
+        // ── Temporary Hearts Burst ──
+        function createTemporaryHearts(count) {
             const container = document.querySelector('.hearts');
-            for (let i = 0; i < 100; i++) { // Massive
+            for (let i = 0; i < count; i++) {
                 const heart = document.createElement('div');
                 heart.classList.add('heart');
                 heart.innerHTML = '💖';
                 heart.style.left = `${Math.random() * 100}%`;
-                heart.style.animationDelay = `${Math.random() * 5}s`;
-                heart.style.animationDuration = `${5 + Math.random() * 3}s`;
-                heart.addEventListener('click', () => {
-                    heart.classList.add('explode');
-                    setTimeout(() => heart.remove(), 1200);
-                });
+                heart.style.top = `${Math.random() * 100}%`;
+                heart.style.animationDuration = `${2 + Math.random() * 2}s`;
                 container.appendChild(heart);
+                setTimeout(() => heart.remove(), 3000);
             }
         }
 
-        // ── Generate Millions of Confetti Vibes ──
-        function createConfetti() {
-            const container = document.querySelector('.confetti');
-            for (let i = 0; i < 300; i++) { // Unbelievable amount
-                const piece = document.createElement('div');
-                piece.classList.add('confetti-piece');
-                piece.style.left = `${Math.random() * 100}%`;
-                piece.style.top = `${Math.random() * 100}%`;
-                piece.style.animationDelay = `${Math.random() * 6}s`;
-                piece.style.animationDuration = `${4 + Math.random() * 4}s`;
-                piece.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
-                container.appendChild(piece);
-            }
-        }
-
-        // ── Smoother Splash Fade ──
+        // ── Init ──
         setTimeout(() => {
             document.getElementById('splash').classList.add('hidden');
-        }, 3000);
+        }, 4000);
+        updateCountdown();
+        setInterval(updateCountdown, 3600000); // Hourly update
 
-        // Init Massive Fun
-        createParticles();
-        createHearts();
-        createConfetti();
+        // ── WebGL Skyline Effects ──
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl-skyline'), alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        const geometry = new THREE.BoxGeometry();
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+        camera.position.z = 5;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Resize Handler
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // ── More Massive Elements (placeholders for expansion) ──
+        // Add thousands more if needed, but browser limits - this is symbolic for massive
     </script>
 </body>
     </html>

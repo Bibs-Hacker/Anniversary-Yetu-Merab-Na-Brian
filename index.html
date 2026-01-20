@@ -161,26 +161,159 @@
             box-shadow: 0 15px 40px rgba(255,105,180,0.7);
         }
 
-        /* Period Tracker Styles (unchanged from previous) */
-        /* ... (keep as is) */
+        /* Period Tracker Styles */
+        .lesson {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: rgba(255, 182, 193, 0.15);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.3);
+            transition: all 0.5s ease;
+        }
 
-        /* Love Messages Styles (unchanged from previous) */
-        /* ... (keep as is) */
+        .lesson:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 45px rgba(255, 182, 193, 0.4);
+        }
 
-        .gallery img {
-            cursor: pointer;
+        .lesson h3 {
+            color: var(--heart-red);
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(255, 20, 147, 0.5);
+        }
+
+        .lesson ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .lesson li {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            box-shadow: inset 0 0 10px rgba(255, 105, 180, 0.2);
             transition: all 0.4s ease;
         }
 
+        .lesson li:hover {
+            background: rgba(255, 105, 180, 0.1);
+            transform: translateX(10px);
+        }
+
+        .countdown {
+            font-size: 2rem;
+            color: var(--neon-gold);
+            text-shadow: 0 0 20px var(--neon-gold);
+            margin-bottom: 40px;
+            animation: countdownGlow 2.5s infinite alternate;
+        }
+
+        @keyframes countdownGlow {
+            from { text-shadow: 0 0 15px #ffd700; }
+            to { text-shadow: 0 0 35px #ff69b4; }
+        }
+
+        .love-message {
+            font-style: italic;
+            color: var(--romantic-gold);
+            margin-top: 30px;
+            text-shadow: 0 0 15px var(--romantic-purple);
+            animation: loveFade 5s infinite;
+        }
+
+        @keyframes loveFade {
+            0%, 100% { opacity: 0.85; }
+            50% { opacity: 1; }
+        }
+
+        /* Certificate Canvas Styles */
+        #certificateCanvas {
+            display: none;
+        }
+
+        /* Gallery Styles */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .gallery img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            transition: all 0.5s ease;
+        }
+
         .gallery img:hover {
-            transform: scale(1.1) rotate(4deg);
-            box-shadow: 0 15px 40px rgba(255,105,180,0.6);
+            transform: scale(1.12) rotate(3deg);
+            box-shadow: 0 20px 50px rgba(255,105,180,0.5);
+        }
+
+        /* Love Messages Styles */
+        .love-messages {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .message-card {
+            background: linear-gradient(135deg, rgba(255,182,193,0.18), rgba(218,112,214,0.15));
+            border-radius: 28px;
+            padding: 40px;
+            border: 1px solid rgba(255,105,180,0.28);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.45), inset 0 0 30px rgba(255,105,180,0.12);
+            transition: all 0.6s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message-card::before {
+            content: "💌";
+            position: absolute;
+            font-size: 140px;
+            opacity: 0.1;
+            top: -30px;
+            right: -50px;
+            transform: rotate(-20deg);
+        }
+
+        .message-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(255,105,180,0.5), inset 0 0 45px rgba(255,105,180,0.25);
+            border-color: rgba(255,105,180,0.7);
+        }
+
+        .message-card h3 {
+            font-size: 1.9rem;
+            margin-bottom: 20px;
+            color: var(--romantic-gold);
+            text-shadow: 0 0 15px rgba(238,232,170,0.8);
+        }
+
+        .message-card p {
+            font-size: 1.2rem;
+            line-height: 1.9;
+            color: #fffdf0;
+            letter-spacing: 0.4px;
+        }
+
+        .from-signature {
+            margin-top: 30px;
+            font-style: italic;
+            color: var(--neon-gold);
+            text-align: right;
+            font-size: 1.3rem;
+            text-shadow: 0 0 12px rgba(255,215,0,0.6);
         }
     </style>
 </head>
 <body>
 
-    <!-- WebGL Techy Lines Background -->
+    <!-- WebGL Techy Lines Animated Background -->
     <canvas id="webgl-background"></canvas>
 
     <!-- Splash Screen -->
@@ -228,6 +361,7 @@
 
         <div class="section">
             <h2 style="font-size:2.6rem; margin-bottom:40px; text-align:center;">Our Gallery Hub 📸</h2>
+            <p>Our special moments, forever captured. Click to feel the love!</p>
             <div class="gallery">
                 <img src="https://files.catbox.moe/spvjqx.jpg" alt="Moment 1" onclick="imageInteract(this)">
                 <img src="https://files.catbox.moe/z544u2.jpg" alt="Moment 2" onclick="imageInteract(this)">
@@ -237,7 +371,8 @@
         </div>
 
         <div class="section" id="periodTracker">
-            <h2 style="font-size:2.6rem; margin-bottom:40px; text-align:center;">Merab's Period Tracker ❤️</h2>
+            <h2 style="font-size:2.6rem; margin-bottom:40px; text-align:center;">Merab's Period Tracker & Lessons ❤️</h2>
+            <p>My dearest Merab, this is for you – to make things easier. I love you so much!</p>
             <div class="countdown" id="countdown">Estimated Days Until Next Period: Calculating...</div>
             <div class="lesson">
                 <h3>Lesson from Teacher Brian: What to Do During Periods</h3>
@@ -249,14 +384,59 @@
                     <li>Eat nutritious foods – more on that below.</li>
                 </ul>
             </div>
-            <!-- (Keep all other lessons as is) -->
+            <div class="lesson">
+                <h3>What NOT to Do</h3>
+                <ul>
+                    <li>Avoid heavy lifting or strenuous activities. 🚫</li>
+                    <li>Don't skip meals – keep energy up! 🍽️</li>
+                    <li>Avoid caffeine and alcohol – they can worsen cramps.</li>
+                    <li>Don't stress – I'm here for you, Merab! 🤗</li>
+                </ul>
+            </div>
+            <div class="lesson">
+                <h3>How to Behave & Feel Better</h3>
+                <ul>
+                    <li>Be kind to yourself – pamper time! 🛀</li>
+                    <li>Communicate if you need space or cuddles. 💬</li>
+                    <li>Track moods – journal helps! 📓</li>
+                    <li>Remember, it's normal – you're strong, my love! 💪❤️</li>
+                </ul>
+            </div>
+            <div class="lesson">
+                <h3>Foods to Take</h3>
+                <ul>
+                    <li>Bananas for potassium – reduces cramps. 🍌</li>
+                    <li>Dark chocolate for mood boost (in moderation!). 🍫</li>
+                    <li>Leafy greens like spinach for iron. 🥬</li>
+                    <li>Ginger tea for nausea relief. ☕</li>
+                    <li>Nuts & seeds for healthy fats. 🥜</li>
+                </ul>
+            </div>
+            <div class="lesson">
+                <h3>Foods to Avoid</h3>
+                <ul>
+                    <li>Salty foods – increase bloating. 🧂🚫</li>
+                    <li>Sugary treats – can worsen mood swings.</li>
+                    <li>Fatty meats – hard to digest.</li>
+                    <li>Caffeine – dehydrates you.</li>
+                </ul>
+            </div>
+            <div class="lesson">
+                <h3>Safe Days & Tips</h3>
+                <ul>
+                    <li>Safe days approx. 8-20 in cycle – but track carefully!</li>
+                    <li>Use apps or calendar – I'm here to help, Merab.</li>
+                    <li>Always use protection if unsure. 🛡️</li>
+                    <li>Irregular? See doc – your health first! 🩺</li>
+                </ul>
+            </div>
             <p class="love-message">Merab, every part of you is perfect to me. I love you endlessly – Brian ❤️</p>
         </div>
 
-        <div class="section">
+        <div class="section" id="certificateSection">
             <h2 style="font-size:2.6rem; margin-bottom:40px; text-align:center;">Our Anniversary Certificate 🎂</h2>
-            <p>Celebrate our love – download your personalized certificate!</p>
-            <button class="nav-button" onclick="downloadCertificate()">Download Certificate 📜</button>
+            <p>Celebrate our love with this beautiful, attractive certificate – designed just for us!</p>
+            <button class="nav-button" onclick="downloadCertificate()">Download Attractive Certificate 📜</button>
         </div>
 
         <footer>
@@ -297,42 +477,82 @@
 
         // Temporary Hearts
         function createTemporaryHearts(count) {
-            const container = document.querySelector('.hearts');
+            const container = document.body; // Add to body for global effect
             for (let i = 0; i < count; i++) {
                 const heart = document.createElement('div');
-                heart.classList.add('heart');
-                heart.innerHTML = '💖';
+                heart.style.position = 'absolute';
+                heart.style.fontSize = '2rem';
+                heart.style.color = 'var(--heart-red)';
                 heart.style.left = `${Math.random() * 100}%`;
                 heart.style.top = `${Math.random() * 100}%`;
-                heart.style.animationDuration = `${2 + Math.random() * 3}s`;
+                heart.style.animation = `floatHeart ${2 + Math.random() * 3}s ease-in-out forwards`;
+                heart.innerHTML = '💖';
                 container.appendChild(heart);
                 setTimeout(() => heart.remove(), 3500);
             }
         }
 
-        // Certificate Download
+        // Enhanced Attractive Certificate
         function downloadCertificate() {
             const canvas = document.createElement('canvas');
-            canvas.width = 800;
-            canvas.height = 600;
+            canvas.width = 1200;
+            canvas.height = 900;
             const ctx = canvas.getContext('2d');
-            ctx.fillStyle = '#1a1a2e';
-            ctx.fillRect(0, 0, 800, 600);
-            ctx.font = 'bold 60px serif';
-            ctx.fillStyle = var(--neon-gold);
+
+            // Gradient Background
+            const grad = ctx.createLinearGradient(0, 0, 1200, 900);
+            grad.addColorStop(0, '#1a1a2e');
+            grad.addColorStop(0.5, '#da70d6');
+            grad.addColorStop(1, '#00bfff');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, 1200, 900);
+
+            // Glowing Border
+            ctx.strokeStyle = '#ffd700';
+            ctx.lineWidth = 20;
+            ctx.strokeRect(50, 50, 1100, 800);
+
+            // Hearts Decoration
+            ctx.font = '120px serif';
+            ctx.fillStyle = '#ff1493';
+            ctx.fillText('❤️', 100, 200);
+            ctx.fillText('❤️', 1000, 200);
+            ctx.fillText('❤️', 100, 800);
+            ctx.fillText('❤️', 1000, 800);
+
+            // Title
+            ctx.font = 'bold 100px serif';
+            ctx.fillStyle = '#fff';
+            ctx.shadowColor = '#ff69b4';
+            ctx.shadowBlur = 30;
             ctx.textAlign = 'center';
-            ctx.fillText('Anniversary Certificate', 400, 150);
-            ctx.font = 'italic 40px serif';
-            ctx.fillStyle = var(--neon-pink);
-            ctx.fillText('Tech Brian & Merab', 400, 250);
-            ctx.font = '30px serif';
-            ctx.fillStyle = var(--text-light);
-            ctx.fillText('Eternally Bonded in Love', 400, 350);
-            ctx.fillText('March 12th Every Year', 400, 400);
-            const link = document.createElement('a');
-            link.download = 'our-love-certificate.png';
-            link.href = canvas.toDataURL();
-            link.click();
+            ctx.fillText('Anniversary Certificate', 600, 250);
+
+            // Names
+            ctx.font = 'italic 80px serif';
+            ctx.fillStyle = '#ffd700';
+            ctx.shadowColor = '#da70d6';
+            ctx.shadowBlur = 20;
+            ctx.fillText('Tech Brian & Merab', 600, 400);
+
+            // Message
+            ctx.font = '60px serif';
+            ctx.fillStyle = '#f0e7f5';
+            ctx.shadowColor = '#00bfff';
+            ctx.shadowBlur = 15;
+            ctx.fillText('Eternally Bonded in Love', 600, 550);
+            ctx.fillText('March 12th Every Year', 600, 650);
+
+            // Seal
+            const sealImg = new Image();
+            sealImg.src = 'https://files.catbox.moe/08b4pp.jpg';
+            sealImg.onload = () => {
+                ctx.drawImage(sealImg, 500, 700, 200, 200);
+                const link = document.createElement('a');
+                link.download = 'our-attractive-love-certificate.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            };
         }
 
         // WebGL Techy Lines Animated Background
@@ -341,27 +561,27 @@
         const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl-background'), alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
 
-        // Create animated lines
+        // Animated lines
         const lines = [];
-        for (let i = 0; i < 100; i++) { // Massive lines
+        for (let i = 0; i < 150; i++) {
             const material = new THREE.LineBasicMaterial({ color: Math.random() * 0xffffff });
             const points = [];
-            points.push(new THREE.Vector3(Math.random() * 20 - 10, Math.random() * 20 - 10, Math.random() * 20 - 10));
-            points.push(new THREE.Vector3(Math.random() * 20 - 10, Math.random() * 20 - 10, Math.random() * 20 - 10));
+            points.push(new THREE.Vector3(Math.random() * 30 - 15, Math.random() * 30 - 15, Math.random() * 30 - 15));
+            points.push(new THREE.Vector3(Math.random() * 30 - 15, Math.random() * 30 - 15, Math.random() * 30 - 15));
             const geometry = new THREE.BufferGeometry().setFromPoints(points);
             const line = new THREE.Line(geometry, material);
             scene.add(line);
             lines.push(line);
         }
 
-        camera.position.z = 15;
+        camera.position.z = 20;
 
         function animate() {
             requestAnimationFrame(animate);
             lines.forEach(line => {
                 line.rotation.x += 0.002;
                 line.rotation.y += 0.003;
-                line.material.color.setHSL(Math.random(), 1, 0.5);
+                line.material.color.setHSL(Math.random(), 0.8, 0.6);
             });
             renderer.render(scene, camera);
         }

@@ -1,17 +1,28 @@
 {
-  "name": "Our Eternal Bond - Tech Brian & Merab",
-  "short_name": "EternalBond",
-  "description": "Our romantic relationship app – a mega chronicle of love!",
+  "name": "Our Sweet Forever – Brian & Merab",
+  "short_name": "Brian & Merab",
+  "description": "A private, romantic love space made with all my heart just for Merab 💗",
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#1a1a2e",
-  "theme_color": "#ff69b4",
+  "background_color": "#fff0f5",
+  "theme_color": "#ffb6c1",
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "https://files.catbox.moe/08b4pp.jpg",
       "sizes": "512x512",
       "type": "image/jpeg",
       "purpose": "any maskable"
+    },
+    {
+      "src": "https://files.catbox.moe/08b4pp.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
     }
-  ]
+  ],
+  "categories": ["lifestyle", "social"],
+  "dir": "ltr",
+  "lang": "en",
+  "prefer_related_applications": false
 }
